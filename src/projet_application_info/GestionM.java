@@ -38,6 +38,9 @@ public class GestionM {
 
         LocalDAO = new LocalDAO();
         LocalDAO.setConnection(dbConnect);
+        
+        FormateurDAO= new FormateurDAO();
+        FormateurDAO.setConnection(dbConnect);
 
         int ch = 0;
         
@@ -94,13 +97,7 @@ public class GestionM {
                 case 3:
                     recherchePartielle();
                     break;
-                 /*case 4:
-                    modification();
-                    break;
-                  case 5:
-                    effacement();
-                    break;
-                 */
+                 
                 case 4:
                     System.exit(0);
                     break;
@@ -227,17 +224,13 @@ public class GestionM {
         return ch.matches(regex);
     }
 
-    public static void main(String[] args) {
-        GestionM local = new GestionM();
-        local.gestion();
-        LocalDAO ld= new LocalDAO();
-    }
+    
    public void menuFormateur(){
        
        int ch = 0;
          do {
            
-            System.out.println(" ======  MENU FORMATEUR ======\n1.Insertion de formateur \n2.recherche exacte local avec sigle \n3.recherche partielle avec description \n4.fin");
+            System.out.println(" ======  MENU FORMATEUR ======\n1.Insertion de formateur \n2.recherche formateur avec matricule \n3.recherche partielle sur le nom de formateur \n4.fin");
             System.out.print("choix :");
             ch = sc.nextInt();
             sc.skip("\n");
@@ -246,16 +239,16 @@ public class GestionM {
                     insertionFormateur();
                     break;
                 case 2:
-                    rechercheExacte();
+                    rechercheFormMatricule();
                     break;
                 case 3:
-                    recherchePartielle();
+                    rechFormNom();
                     break;
                  /*case 4:
                     modification();
                     break;
                   case 5:
-                    effacement();
+                    supprimerFormateur();
                     break;
                  */
                 case 4:
@@ -300,4 +293,128 @@ public class GestionM {
         
        
    }
+   
+   public void rechercheFormMatricule() {
+
+
+        try {
+            System.out.println("Entrer le matricule du formateur :");
+            String matricule = sc.nextLine();
+            formateurActuel = FormateurDAO.readMatricule(matricule);
+            System.out.println("Formateur recherché : " + formateurActuel);
+
+            int choix = 0;
+            String option = "";
+            sc.skip("\n");
+            do {
+                do {
+                    System.out.println("Menu secondaire : \n\t1-Modifier \n\t2-Supprimer \n\t3-Revenir en arrière");
+                    option = sc.nextLine();
+                } while (verifier_chaine(option, "[1-3]") == false);
+                choix = Integer.parseInt(option);
+                switch (choix) {
+                    case 1:
+                        modificationFormateur();
+                        break;
+                    case 2:
+                        supprimerFormateur();
+                        break;
+                    case 3:
+                        break;
+                }
+            } while (choix != 3);
+
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+        }
+
+    }
+   
+    public void rechFormNom() {
+        System.out.println("Entrer nom: ");
+        String nom = sc.nextLine().toLowerCase();
+        try {
+            List<Formateur> alc = ((FormateurDAO) FormateurDAO).rechFormNom(nom);
+            for (Formateur fo : alc) {
+                System.out.println(fo);
+            }
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+        }
+    }
+
+   
+    public void modificationFormateur() {
+        String option = "";
+        int choix;
+        try {
+            //sc.skip("\n");
+            do {
+                do {
+                    System.out.println("Quelle modification voulez-vous apporter ? \n\t1-Nom et Prenom: \n\t2-Adresse \n\t3-Changer le numero de tel  \n\t4-Revenir au menu precedent");
+                    option = sc.nextLine();
+                } while (verifier_chaine(option, "[1-3]") == false);
+                choix = Integer.parseInt(option);
+                switch (choix) {
+                    case 1:
+                        System.out.println("Entrer le nom: ");
+                        String nom = sc.nextLine();
+                        formateurActuel.setNom(nom);
+                        FormateurDAO.update(formateurActuel);
+                        System.out.println("Entrer le prenom");
+                        String prenom = sc.nextLine();
+                        formateurActuel.setPrenom(prenom);
+                        FormateurDAO.update(formateurActuel);
+                        break;
+                    case 2:
+                        System.out.println("Entrer le numero n: ");
+                        String numero = sc.nextLine();
+                        formateurActuel.setNumero(numero);
+                        FormateurDAO.update(formateurActuel);
+                        System.out.println("Entrer la rue: ");
+                        String rue = sc.nextLine();
+                        formateurActuel.setRue(rue);
+                        FormateurDAO.update(formateurActuel);
+                        
+                        System.out.println("Entrer la localite: ");
+                        String localite = sc.nextLine();
+                        formateurActuel.setLocalite(localite);
+                        FormateurDAO.update(formateurActuel);
+                        System.out.println("Entrer le cp: ");
+                        int cp = sc.nextInt();
+                        formateurActuel.setCp(cp);
+                        FormateurDAO.update(formateurActuel);
+                        sc.skip("\n");
+                        break;
+                    
+                    case 3: 
+                        System.out.println("Entrer le numero: ");
+                        String tel =sc.nextLine();
+                        formateurActuel.setTel(tel);
+                        FormateurDAO.update(formateurActuel);
+                        break;
+                    case 4:
+                        break;
+                }
+            } while (choix != 5);
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+        }
+
+    }
+   public void supprimerFormateur() {
+        try {
+            FormateurDAO.delete(formateurActuel);
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+        }
+        
+    }
+   public static void main(String[] args) {
+        GestionM local = new GestionM();
+        local.gestion();
+        LocalDAO ld= new LocalDAO();
+        FormateurDAO fd = new FormateurDAO();
+        
+    }
 }

@@ -2,7 +2,6 @@
 package formation.DAO;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.*;
 import formation.metier.Local;
 
@@ -222,27 +221,6 @@ public class LocalDAO extends DAO <Local> {
         
     }
     
-    /**
-     * méthode permettant de récupérer la date de la dernière commande d'un client
-     * @param obj client recherché
-     * @return  date de la dernière commande
-     * @throws SQLException client sans commande
-     */
-    /*
-    public LocalDate dern_com(Client obj) throws SQLException{
-         String req = "select derniere_com from CLIDATE where idclient = ?";
-         try(PreparedStatement pstm = dbConnect.prepareStatement(req)){
-             pstm.setInt(1,obj.getIdclient());
-             try(ResultSet rs = pstm.executeQuery()){
-                 if(rs.next()){
-                     LocalDate dt = rs.getDate(1).toLocalDate();
-                     return dt;
-                 }
-                 else throw new SQLException("aucune commande enregistrée pour ce client");
-             }
-         }
-    }
-    */
 
 }
 

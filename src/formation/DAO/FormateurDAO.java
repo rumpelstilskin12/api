@@ -76,16 +76,109 @@ public class FormateurDAO extends DAO <Formateur> {
         }
     }
 
-    @Override
-    public Formateur update(Formateur obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Formateur readMatricule(String matricule) throws SQLException {
 
-    @Override
-    public void delete(Formateur obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String req = "select * from api_formateur where matricule = ?";
+
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+
+            pstm.setString(1, matricule);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    
+                    int idform = rs.getInt("IDFORM");
+                   
+                    String nom = rs.getString("NOM");
+                    String prenom = rs.getString("PRENOM");
+                    String numero = rs.getString("NUMERO");
+                    String rue = rs.getString("RUE");
+                    String localite = rs.getString("LOCALITE");
+                    int cp = rs.getInt("CP");
+                    String tel = rs.getString("tel");
+                    return new Formateur(idform,matricule,nom,prenom,numero,rue,localite,cp,tel);
+
+                } else {
+                    throw new SQLException("Matricule formateur inconnu");
+                }
+
+            }
+        }
     }
     
+    @Override
+    public Formateur update(Formateur obj) throws SQLException {
+        String req = "update api_formateur set nom=?,prenom=?,numero=?,rue=?,localite=?,cp=?,tel=? where matricule=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+
+            //pstm.setInt(8, obj.getIdlocal());
+            pstm.setString(8, obj.getMatricule());
+            pstm.setString(1, obj.getNom());
+            pstm.setString(2, obj.getPrenom());
+            pstm.setString(3, obj.getNumero());
+            pstm.setString(4, obj.getRue());
+            pstm.setString(5, obj.getLocalite());
+            pstm.setInt(6, obj.getCp());
+            pstm.setString(7, obj.getTel());
+            
+            
+            int n = pstm.executeUpdate();
+            if (n == 0) {
+                throw new SQLException("aucune ligne client mise à jour");
+            }
+            return readMatricule(obj.getMatricule());
+        }
+    }
+    
+    
+    @Override
+    public void delete(Formateur obj) throws SQLException {
+        String req = "delete from api_formateur where matricule=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+
+            pstm.setString(1, obj.getMatricule());
+            int n = pstm.executeUpdate();
+            if (n == 0) {
+                throw new SQLException("aucune ligne effacée ====> le formateur que vous voulez supprimer n'existe pas");
+            }else{
+                System.out.println("Le formateur a bien été supprimé ");
+            }
+
+        }
+    }
+    
+    public List<Formateur> rechFormNom(String rechFormNom) throws SQLException {
+        List<Formateur> plusieurs = new ArrayList<>();
+        String req = "select * from api_formateur where LOWER(nom) like ?";
+
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+            pstm.setString(1, "%"+rechFormNom+"%");
+            try (ResultSet rs = pstm.executeQuery()) {
+                boolean trouve = false;
+                while (rs.next()) {
+                    trouve = true;
+                    int idform = rs.getInt("IDFORM");
+                    String matricule = rs.getString("MATRICULE");
+                    String nom = rs.getString("NOM");
+                    String prenom = rs.getString("PRENOM");
+                    String numero = rs.getString("NUMERO");
+                    String rue = rs.getString("RUE");
+                    String localite = rs.getString("LOCALITE");
+                    int cp = rs.getInt("CP");
+                    String tel = rs.getString("tel");
+                    
+                    plusieurs.add(new Formateur(idform,matricule,nom,prenom,numero,rue,localite,cp,tel));
+                }
+
+                if (!trouve) {
+                    throw new SQLException("local inconnu");
+                } else {
+                    return plusieurs;
+                }
+            }
+        }
+        
+        
+    }
     
     
 }

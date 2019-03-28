@@ -17,16 +17,15 @@ public abstract class DAO<T> {
    public  void setConnection(Connection nouvdbConnect) {
       dbConnect=nouvdbConnect;
    }
-	/**
+    /**
      * Permet de récupérer un objet via son ID
      *
      * @param sigle identifiant de l'objet recherché
      * @return T objet trouvé
      * @throws SQLException objet non trouvé
      */
-	//retirer de l'interface public abstract T read(String sigle)throws SQLException;
         
-        /**
+     /**
      * Permet de récupérer un objet via son ID
      *
      * @param idlocal identifiant de l'objet recherché
