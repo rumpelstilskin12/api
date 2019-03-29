@@ -1,6 +1,7 @@
 
 package projet_application_info;
 
+import formation.DAO.CoursDAO;
 import java.sql.*;
 import myconnections.*;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.util.Scanner;
 import formation.DAO.LocalDAO;
 import formation.DAO.DAO;
 import formation.DAO.FormateurDAO;
+import formation.metier.Cours;
 import formation.metier.Formateur;
 import formation.metier.Local;
 import myconnections.DBConnection;
@@ -22,7 +24,9 @@ public class GestionM {
     Local localActuel = null;
     private LocalDAO LocalDAO ;
     Formateur formateurActuel=null;
-    private FormateurDAO FormateurDAO;        
+    private FormateurDAO FormateurDAO; 
+    Cours coursActuel = null;
+    private CoursDAO CoursDAO;
 
     public GestionM() {
     }
@@ -41,6 +45,9 @@ public class GestionM {
         
         FormateurDAO= new FormateurDAO();
         FormateurDAO.setConnection(dbConnect);
+        
+        CoursDAO= new CoursDAO();
+        CoursDAO.setConnection(dbConnect);
 
         int ch = 0;
         
@@ -57,7 +64,7 @@ public class GestionM {
             switch(ch){
                 
                 case 1:
-                    //cours();
+                    menuCours();
                     break;
                 case 2:
                     menuFormateur();
@@ -78,13 +85,65 @@ public class GestionM {
         }while(ch!=5);
        DBConnection.closeConnection();//à la fin on doit fermer
     }
+        public void menuCours(){
+         int ch = 0;
+         do {
+           
+            System.out.println(" ======  MENU COURS ======");
+            System.out.println("1.creation d'un cours");
+            System.out.println("2.recherche cours via son id");
+            System.out.println("3.recherche partielle d'un cours");
+             System.out.println("4.revenir au menu principal");
+            System.out.print("choix :");
+            ch = sc.nextInt();
+            sc.skip("\n");
+            switch (ch) {
+                case 1:
+                    ajouterCours();//regler le lower
+                    break;
+                case 2:
+                    //rechercheCours();
+                    break;
+                case 3:
+                    //rechercheMatiere();
+                    break;
+                 case 4:
+                    //System.exit(0);
+                    break;
+                default:
+                    System.out.println("choix incorrect");
+            }
+
+        } while (ch != 5);
+        
+    }
+        public void ajouterCours() {
+        System.out.print("Matiere :");
+        String matiere = sc.nextLine();
+        System.out.print("Heures:");
+        int heures = sc.nextInt();
+        sc.skip("\n");
+        coursActuel = new Cours(0,matiere,heures);
+        try {
+            coursActuel = CoursDAO.create(coursActuel);
+            System.out.println("Cours actuel : " + coursActuel);
+        } catch (SQLException e) {
+            System.out.println("erreur :" + e);
+        }
+    }
+        
+
         
         public void menuLocal(){
          int ch = 0;
          do {
            
-            System.out.println(" ======  MENU LOCAL ======\n1.creation \n2.recherche exacte local avec sigle \n3.recherche partielle avec description \n4.fin");
-            System.out.print("choix :");
+             System.out.println(" ======  MENU LOCAL ======");
+             System.out.println("1.creation d'un local");
+             System.out.println("2.recherche exacte local avec sigle");
+             System.out.println("3.recherche partielle d'un local sur base de sa description");
+             System.out.println("4.revenir au menu principal");
+             System.out.print("choix :");
             ch = sc.nextInt();
             sc.skip("\n");
             switch (ch) {
@@ -99,7 +158,6 @@ public class GestionM {
                     break;
                  
                 case 4:
-                    System.exit(0);
                     break;
                 default:
                     System.out.println("choix incorrect");
@@ -125,7 +183,6 @@ public class GestionM {
         } catch (SQLException e) {
             System.out.println("erreur :" + e);
         }
-        //question why 0 en id 
     }
 
     public void rechercheExacte() {
@@ -230,7 +287,11 @@ public class GestionM {
        int ch = 0;
          do {
            
-            System.out.println(" ======  MENU FORMATEUR ======\n1.Insertion de formateur \n2.recherche formateur avec matricule \n3.recherche partielle sur le nom de formateur \n4.fin");
+            System.out.println(" ======  MENU FORMATEUR ======");
+            System.out.println("1.Insertion de formateur");
+            System.out.println("2.recherche formateur avec matricule");
+            System.out.println("3.recherche partielle sur le nom du formateur");
+            System.out.println("4.revenir au menu principal");
             System.out.print("choix :");
             ch = sc.nextInt();
             sc.skip("\n");
@@ -244,13 +305,6 @@ public class GestionM {
                 case 3:
                     rechFormNom();
                     break;
-                 /*case 4:
-                    modification();
-                    break;
-                  case 5:
-                    supprimerFormateur();
-                    break;
-                 */
                 case 4:
                     System.exit(0);
                     break;
@@ -410,11 +464,14 @@ public class GestionM {
         }
         
     }
+   
+   
    public static void main(String[] args) {
         GestionM local = new GestionM();
         local.gestion();
         LocalDAO ld= new LocalDAO();
         FormateurDAO fd = new FormateurDAO();
+        CoursDAO cd = new CoursDAO();
         
     }
 }
