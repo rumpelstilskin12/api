@@ -16,15 +16,18 @@ import java.util.List;
 import myconnections.DBConnection;
 
 /**
+ * classe de mappage poo-relationnel VueHeuresSessionCours
  *
- * @author BARCA
+ * @author Kherbache Walid
+ * @version 1.0
+ * @see VueHeuresSession
  */
 public class VueHeuresSessionDAO extends DAO <VueHeuresSession>{
 
     Connection dbConnect=DBConnection.getConnection();
     /**
      * Methode permettant de recuperer les données de la vue
-     * @throws SQLException 
+     * @throws SQLException erreur d'affichage de la vue
      */
     public List<VueHeuresSession> affichageVue(int idsesscours) throws SQLException {
         List<VueHeuresSession> vue = new ArrayList<>();
@@ -47,7 +50,7 @@ public class VueHeuresSessionDAO extends DAO <VueHeuresSession>{
         return vue;
     }
     
-    
+    //=====================================================CRUD non utilisé ====================================================
     @Override
     public VueHeuresSession read(int idlocal) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

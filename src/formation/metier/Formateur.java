@@ -3,6 +3,7 @@ package formation.metier;
 /**
  * classe metier de gestion de formateurs
  * @author Walid Kherbache
+ * @version 1.0
  */
 
 public class Formateur {

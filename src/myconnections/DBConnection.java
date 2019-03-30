@@ -5,7 +5,7 @@ import java.util.*;
 
 public class DBConnection {
 
-     private static Connection dbConnect = null;
+ private static Connection dbConnect = null;
 
   private DBConnection(){}   
      

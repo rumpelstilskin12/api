@@ -13,17 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * classe de mappage poo-relationnel cours
  *
- * @author BARCA
+ * @author Kherbache Walid
+ * @version 1.0
+ * @see Cours
  */
 public class CoursDAO extends DAO <Cours> {
     
     /**
-     * création d'un local sur base des valeurs de son objet métier
+     * création d'un cours sur base des valeurs de son objet métier
      *
      * @throws SQLException erreur de création
-     * @param obj local à créer
-     * @return local créé
+     * @param obj cours à créer
+     * @return cours créé
      */
     @Override
     public Cours create(Cours obj) throws SQLException {
@@ -55,7 +58,13 @@ public class CoursDAO extends DAO <Cours> {
             }
         }
     }
-    
+     /**
+     * récupération des données d'un cours sur base de son identifiant
+     *
+     * @throws SQLException idcours inconnu
+     * @param idcours identifiant du cours
+     * @return cours trouvé
+     */
     @Override
     public Cours read (int idcours) throws SQLException {
 
@@ -81,12 +90,13 @@ public class CoursDAO extends DAO <Cours> {
     
 
     /**
-     * mise à jour des données du client sur base de son identifiant
+     * mise à jour des données du cours sur base de son identifiant
      *
-     * @return Client
-     * @param obj client à mettre à jour
+     * @return cours
+     * @param obj cours à mettre à jour
      * @throws SQLException erreur de mise à jour
      */
+    
     @Override
     public Cours update(Cours obj) throws SQLException {
         String req = "update api_cours set matiere=?,heures=? where idcours=?";
@@ -104,10 +114,10 @@ public class CoursDAO extends DAO <Cours> {
     }
 
     /**
-     * effacement du client sur base de son identifiant
+     * effacement du cours sur base de son identifiant
      *
-     * @throws SQLException erreur d'effacement
-     * @param obj client à effacer
+     * @throws SQLException erreur de suppression du cours
+     * @param obj cours à effacer
      */
     @Override
     public void delete(Cours obj) throws SQLException {
@@ -130,7 +140,12 @@ public class CoursDAO extends DAO <Cours> {
  
     
      
-    /** Recherche Cours par matière**/
+    /**
+     * Recherche Cours par matiere
+     * @param coursRechMatiere
+     * @return liste de cours
+     * @throws SQLException cours inconnu
+     */
      
      public List<Cours> rechCoursMat(String coursRechMatiere) throws SQLException {
         List<Cours> plusieurs = new ArrayList<>();

@@ -5,7 +5,13 @@ import java.sql.*;
 import java.util.*;
 import formation.metier.Local;
 
-
+/**
+ * classe de mappage poo-relationnel local
+ *
+ * @author Kherbache Walid
+ * @version 1.0
+ * @see Local
+ */
 public class LocalDAO extends DAO <Local> {
 
     /**
@@ -78,11 +84,11 @@ public class LocalDAO extends DAO <Local> {
     }
     
     /**
-     * récupération des données d'un client sur base de son identifiant
+     * récupération des données d'un local sur base de son sigle
      *
-     * @throws SQLException code inconnu
-     * @param sigle identifiant du client
-     * @return client trouvé
+     * @throws SQLException sigle local inconnu
+     * @param sigle sigle du local
+     * @return local trouvé
      */
     
     public Local readSigle(String sigle) throws SQLException {

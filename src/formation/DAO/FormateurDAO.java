@@ -4,15 +4,24 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
 import formation.metier.Formateur;
+
+/**
+ * classe de mappage poo-relationnel formateur
+ *
+ * @author Kherbache Walid
+ * @version 1.0
+ * @see Formateur
+ */
+
 public class FormateurDAO extends DAO <Formateur> {
     
-    
+ 
     /**
      * création d'un formateur sur base des valeurs de son objet métier
      *
      * @throws SQLException erreur de création
-     * @param obj local à créer
-     * @return local créé
+     * @param obj formateur à créer
+     * @return formateur créé
      */
     @Override
     public Formateur create(Formateur obj) throws SQLException {
@@ -52,7 +61,13 @@ public class FormateurDAO extends DAO <Formateur> {
             }
         }
     }
-       
+     /**
+     * récupération des données d'un formateur sur base de son identifiant
+     *
+     * @throws SQLException matricule du formateur inconnu
+     * @param idform identifiant du formateur
+     * @return formateur trouvé
+     */  
     @Override
     public Formateur read (int idform) throws SQLException {
 
@@ -81,7 +96,13 @@ public class FormateurDAO extends DAO <Formateur> {
             }
         }
     }
-
+     /**
+     * récupération des données d'un formateur sur base de son matricule
+     *
+     * @throws SQLException matricule formateur inconnu
+     * @param matricule matricule du formateur
+     * @return formateur trouvé
+     */
     public Formateur readMatricule(String matricule) throws SQLException {
 
         String req = "select * from api_formateur where matricule = ?";
@@ -113,7 +134,7 @@ public class FormateurDAO extends DAO <Formateur> {
     /**
      * mise à jour des données du formateur sur base de son matricule
      *
-     * @return Matricule
+     * @return formateur
      * @param obj Formateur à mettre à jour
      * @throws SQLException erreur de mise à jour
      */
@@ -142,9 +163,10 @@ public class FormateurDAO extends DAO <Formateur> {
     }
     
     /**
-     * 
-     * @param obj
-     * @throws SQLException 
+     * effacement d'un formateur sur base de son matricule
+     *
+     * @throws SQLException erreur d'effacement
+     * @param obj formateur à effacer
      */
     @Override
     public void delete(Formateur obj) throws SQLException {
@@ -162,10 +184,11 @@ public class FormateurDAO extends DAO <Formateur> {
         }
     }
     /**
+     * Recherche d'un formateur sur base de son nom
      * 
      * @param rechFormNom
-     * @return
-     * @throws SQLException 
+     * @return formateur
+     * @throws SQLException erreur formateur introuvable
      */
     public List<Formateur> rechFormNom(String rechFormNom) throws SQLException {
         List<Formateur> plusieurs = new ArrayList<>();
@@ -191,7 +214,7 @@ public class FormateurDAO extends DAO <Formateur> {
                 }
 
                 if (!trouve) {
-                    throw new SQLException("local inexistant");
+                    throw new SQLException("formateur inexistant");
                 } else {
                     return plusieurs;
                 }
