@@ -111,10 +111,10 @@ public class LocalDAO extends DAO <Local> {
     }
 
     /**
-     * mise à jour des données du client sur base de son identifiant
+     * mise à jour des données du local sur base de son sigle
      *
-     * @return Client
-     * @param obj client à mettre à jour
+     * @return Local
+     * @param obj local à mettre à jour
      * @throws SQLException erreur de mise à jour
      */
     @Override
@@ -122,7 +122,6 @@ public class LocalDAO extends DAO <Local> {
         String req = "update api_local set places=?,description=? where sigle=?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
 
-            //pstm.setInt(8, obj.getIdlocal());
             pstm.setString(3, obj.getSigle());
             pstm.setInt(1, obj.getPlaces());
             pstm.setString(2, obj.getDescription());
@@ -135,10 +134,10 @@ public class LocalDAO extends DAO <Local> {
     }
 
     /**
-     * effacement du client sur base de son identifiant
+     * effacement d'un local sur base de son sigle
      *
      * @throws SQLException erreur d'effacement
-     * @param obj client à effacer
+     * @param obj local à effacer
      */
     @Override
     public void delete(Local obj) throws SQLException {
@@ -158,7 +157,14 @@ public class LocalDAO extends DAO <Local> {
     }
 
      
-    /** Recherche description**/
+ 
+    /**
+     * Recherche d'un local sur base de sa description
+     * 
+     * @param localRdesc
+     * @return Local
+     * @throws SQLException erreur local introuvable
+     */
      
      public List<Local> rechLocalDesc(String localRdesc) throws SQLException {
         List<Local> plusieurs = new ArrayList<>();

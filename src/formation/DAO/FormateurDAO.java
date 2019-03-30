@@ -6,6 +6,14 @@ import java.util.*;
 import formation.metier.Formateur;
 public class FormateurDAO extends DAO <Formateur> {
     
+    
+    /**
+     * création d'un formateur sur base des valeurs de son objet métier
+     *
+     * @throws SQLException erreur de création
+     * @param obj local à créer
+     * @return local créé
+     */
     @Override
     public Formateur create(Formateur obj) throws SQLException {
 
@@ -102,7 +110,13 @@ public class FormateurDAO extends DAO <Formateur> {
             }
         }
     }
-    
+    /**
+     * mise à jour des données du formateur sur base de son matricule
+     *
+     * @return Matricule
+     * @param obj Formateur à mettre à jour
+     * @throws SQLException erreur de mise à jour
+     */
     @Override
     public Formateur update(Formateur obj) throws SQLException {
         String req = "update api_formateur set nom=?,prenom=?,numero=?,rue=?,localite=?,cp=?,tel=? where matricule=?";
@@ -121,13 +135,17 @@ public class FormateurDAO extends DAO <Formateur> {
             
             int n = pstm.executeUpdate();
             if (n == 0) {
-                throw new SQLException("aucune ligne client mise à jour");
+                throw new SQLException("Le formateur n'a pas été mis à jour");
             }
             return readMatricule(obj.getMatricule());
         }
     }
     
-    
+    /**
+     * 
+     * @param obj
+     * @throws SQLException 
+     */
     @Override
     public void delete(Formateur obj) throws SQLException {
         String req = "delete from api_formateur where matricule=?";
@@ -136,14 +154,19 @@ public class FormateurDAO extends DAO <Formateur> {
             pstm.setString(1, obj.getMatricule());
             int n = pstm.executeUpdate();
             if (n == 0) {
-                throw new SQLException("aucune ligne effacée ====> le formateur que vous voulez supprimer n'existe pas");
+                throw new SQLException("Le formateur n'a pas été supprimé");//le formateur que vous voulez supprimer n'existe pas
             }else{
                 System.out.println("Le formateur a bien été supprimé ");
             }
 
         }
     }
-    
+    /**
+     * 
+     * @param rechFormNom
+     * @return
+     * @throws SQLException 
+     */
     public List<Formateur> rechFormNom(String rechFormNom) throws SQLException {
         List<Formateur> plusieurs = new ArrayList<>();
         String req = "select * from api_formateur where LOWER(nom) like ?";
@@ -168,7 +191,7 @@ public class FormateurDAO extends DAO <Formateur> {
                 }
 
                 if (!trouve) {
-                    throw new SQLException("local inconnu");
+                    throw new SQLException("local inexistant");
                 } else {
                     return plusieurs;
                 }

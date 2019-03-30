@@ -35,7 +35,7 @@ public class GestionM {
     public GestionM() {
     }
 
-    public void gestion() {
+    public void menuPrincipal() {
         Connection dbConnect = DBConnection.getConnection();
         if (dbConnect == null) {
             System.out.println("connection invalide");
@@ -58,7 +58,7 @@ public class GestionM {
         
         VueHeuresSessionDAO=new VueHeuresSessionDAO();
         VueHeuresSessionDAO.setConnection(dbConnect);
-
+        
         int ch = 0;
         do{
             System.out.println("==========MENU PRINCIPAL============");
@@ -94,8 +94,8 @@ public class GestionM {
         }while(ch!=5);
         
        DBConnection.closeConnection();
-        
-    }
+    }        
+    
     
     
 //=================================================================   GESTION COURS  ==============================================================================
@@ -106,23 +106,23 @@ public class GestionM {
             System.out.println(" ======  MENU COURS ======");
             System.out.println("1.creation d'un cours");
             System.out.println("2.recherche cours via son id");
-            System.out.println("3.recherche partielle d'un cours");
+            System.out.println("3.recherche d'un cours");
              System.out.println("4.revenir au menu principal");
             System.out.print("choix :");
             ch = sc.nextInt();
             sc.skip("\n");
             switch (ch) {
                 case 1:
-                    ajouterCours();//regler le lower
+                    ajouterCours();
                     break;
                 case 2:
-                    //rechercheCours();
+                    rechercheCours();
                     break;
                 case 3:
-                    //rechercheMatiere();
+                    rechercheMatiere();
                     break;
                  case 4:
-                    //menuPrincipal();
+                    menuPrincipal();
                     break;
                 default:
                     System.out.println("choix incorrect");
@@ -132,9 +132,9 @@ public class GestionM {
         
     }
         public void ajouterCours() {
-        System.out.print("Matiere :");
+        System.out.print("Veuillez entrer une matiere :");
         String matiere = sc.nextLine();
-        System.out.print("Heures:");
+        System.out.print("Veuillez entrer les heures:");
         int heures = sc.nextInt();
         sc.skip("\n");
         coursActuel = new Cours(0,matiere,heures);
@@ -145,6 +145,106 @@ public class GestionM {
             System.out.println("erreur :" + e);
         }
     }
+        
+         public void rechercheCours() {    
+
+
+        try {
+            System.out.println("Veuillez entrer l'id du cours :");
+            int id = sc.nextInt();
+            sc.skip("\n");
+            coursActuel = CoursDAO.read(id);
+            System.out.println("Cours recherché : " + coursActuel);
+
+            int choix = 0;
+            String option = "";
+            sc.skip("\n");
+            do {
+                do {
+                    System.out.println("Menu secondaire :");
+                    System.out.println("\t1.Modifier");
+                    System.out.println("\t2.Supprimer");
+                    System.out.println("\t3.Revenir au menu principal");
+                    option = sc.nextLine();
+                } while (verifier_chaine(option, "[1-3]") == false);
+                choix = Integer.parseInt(option);
+                switch (choix) {
+                    case 1:
+                        modificationCours();
+                        break;
+                    case 2:
+                        supprimerCours();
+                        break;
+                    case 3:menuPrincipal();
+                        break;
+                }
+            } while (choix != 3);
+
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+        }
+
+    }
+         
+         public void rechercheMatiere() {
+        System.out.println("Veuillez entrer la matiere du cours : ");
+        String matiere = sc.nextLine().toLowerCase();
+        try {
+            List<Cours> alc = ((CoursDAO) CoursDAO).rechCoursMat(matiere);
+            for (Cours c : alc) {
+                System.out.println(c);
+            }
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+        }
+    }
+
+    public void modificationCours() {
+        String option = "";
+        int choix;
+        try {
+            do {
+                do {
+                    System.out.println("Quelle modification voulez-vous apporter ?");
+                    System.out.println("\t1.Matiere du cours: ");
+                    System.out.println("\t2.Heures de cours: ");
+                    System.out.println("\t3.Revenir au menu cours ");
+                    option = sc.nextLine();
+                } while (verifier_chaine(option, "[1-3]") == false);
+                choix = Integer.parseInt(option);
+                switch (choix) {
+                    case 1:
+                        System.out.println("Veuillez entrer la matiere du cours: ");
+                        String matiere = sc.nextLine();
+                        coursActuel.setMatiere(matiere);
+                        CoursDAO.update(coursActuel);
+                        break;
+                    case 2:
+                        System.out.println("Veuillez entrer les heures de cours: ");
+                        int heures = sc.nextInt();
+                        sc.skip("\n");
+                        coursActuel.setHeures(heures);
+                        CoursDAO.update(coursActuel);
+                        break;
+
+                    case 3:menuCours();
+                        break;
+                }
+            } while (choix != 4);
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+        }
+
+    }
+
+    public void supprimerCours() {
+        try {
+            CoursDAO.delete(coursActuel);
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+        }
+    }
+
         
 
   //=================================================================   GESTION LOCAL  ==============================================================================      
@@ -172,7 +272,7 @@ public class GestionM {
                     break;
                  
                 case 4:
-                    //menuPrincipal();
+                    menuPrincipal();
                     break;
                 default:
                     System.out.println("choix incorrect");
@@ -183,12 +283,12 @@ public class GestionM {
     }
 
     public void creation() {
-        System.out.print("Sigle du local:");
+        System.out.print("Veuillez entrer un sigle de local:");
         String sigle = sc.nextLine();
-        System.out.print("Nombre de places disponible: :");
+        System.out.print("Veuillez entrer le nombre de places disponible: :");
         int places = sc.nextInt();
         sc.skip("\n");
-        System.out.print("Description:");
+        System.out.print("Veuillez entrer une description:");
         String desc = sc.nextLine();
 
         localActuel = new Local(0, sigle, places, desc);
@@ -204,7 +304,7 @@ public class GestionM {
 
 
         try {
-            System.out.println("Entrer le Sigle du local :");
+            System.out.println("Veuillez entrer le sigle du local :");
             String sigle = sc.nextLine();
             localActuel = LocalDAO.readSigle(sigle);
             System.out.println("Local recherché : " + localActuel);
@@ -214,7 +314,10 @@ public class GestionM {
             sc.skip("\n");
             do {
                 do {
-                    System.out.println("Menu secondaire : \n\t1-Modifier \n\t2-Supprimer \n\t3-Revenir au menu principal");
+                    System.out.println("Menu secondaire :");
+                    System.out.println("\t1.Modifier");
+                    System.out.println("\t2.Supprimer");
+                    System.out.println("\t3.Revenir au menu principal");
                     option = sc.nextLine();
                 } while (verifier_chaine(option, "[1-3]") == false);
                 choix = Integer.parseInt(option);
@@ -225,7 +328,7 @@ public class GestionM {
                     case 2:
                         effacement();
                         break;
-                    case 3:gestion();
+                    case 3:menuPrincipal();
                         break;
                 }
             } while (choix != 3);
@@ -237,7 +340,7 @@ public class GestionM {
     }
 
     public void recherchePartielle() {
-        System.out.println("Entrer description : ");
+        System.out.println("Veuillez entrer une description : ");
         String description = sc.nextLine().toLowerCase();
         try {
             List<Local> alc = ((LocalDAO) LocalDAO).rechLocalDesc(description);
@@ -253,28 +356,31 @@ public class GestionM {
         String option = "";
         int choix;
         try {
-            //sc.skip("\n");
             do {
                 do {
-                    System.out.println("Quelle modification voulez-vous apporter ? \n\t1-Nombre de places: \n\t2-Description \n\t3-Revenir au menu precedent");
+                    System.out.println("Quelle modification voulez-vous apporter ?");
+                    System.out.println("\t1.Nombre de places: ");
+                    System.out.println("\t2.Description: ");
+                    System.out.println("\t3.Revenir au menu local ");
                     option = sc.nextLine();
                 } while (verifier_chaine(option, "[1-3]") == false);
                 choix = Integer.parseInt(option);
                 switch (choix) {
                     case 1:
-                        System.out.println("Entrez le nombres de places: ");
+                        System.out.println("Veuillez entrer le nombres de places: ");
                         int nbr = sc.nextInt();
+                        sc.skip("\n");
                         localActuel.setPlaces(nbr);
                         LocalDAO.update(localActuel);
                         break;
                     case 2:
-                        System.out.println("Entres la description: ");
+                        System.out.println("Veuillez entrer la description: ");
                         String desc = sc.nextLine();
                         localActuel.setDescription(desc);
                         LocalDAO.update(localActuel);
                         break;
 
-                    case 3:
+                    case 3:menuLocal();
                         break;
                 }
             } while (choix != 4);
@@ -292,9 +398,7 @@ public class GestionM {
         }
     }
 
-    public boolean verifier_chaine(String ch, String regex) {
-        return ch.matches(regex);
-    }
+    
 
  //=================================================================   GESTION FORMATEUR  ==============================================================================   
    public void menuFormateur(){
@@ -304,9 +408,9 @@ public class GestionM {
            
             System.out.println(" ======  MENU FORMATEUR ======");
             System.out.println("1.Insertion de formateur");
-            System.out.println("2.recherche formateur avec matricule");
-            System.out.println("3.recherche partielle sur le nom du formateur");
-            System.out.println("4.revenir au menu principal");
+            System.out.println("2.Recherche formateur avec matricule");
+            System.out.println("3.Recherche partielle sur le nom du formateur");
+            System.out.println("4.Revenir au menu principal");
             System.out.print("choix :");
             ch = sc.nextInt();
             sc.skip("\n");
@@ -321,7 +425,7 @@ public class GestionM {
                     rechFormNom();
                     break;
                 case 4:
-                    //menuPrincipal();
+                    menuPrincipal();
                     break;
                 default:
                     System.out.println("choix incorrect");
@@ -333,25 +437,25 @@ public class GestionM {
    }
    public void insertionFormateur(){
        
-        System.out.print("Entrer le matricule:");
+        System.out.print("Veuillez entrer un matricule:");
         String matricule = sc.nextLine();
-        System.out.print("Entrer le nom:");
+        System.out.print("Veuillez entrer un nom:");
         String nom = sc.nextLine();
-        System.out.print("Entrer le prenom:");
+        System.out.print("Veuillez entrer un prenom:");
         String prenom = sc.nextLine();
-        System.out.println("Entrer le numero:");
+        System.out.println("Veuillez entrer un numero:");
         String numero =sc.nextLine();
-        System.out.println("Entrer la rue:");
+        System.out.println("Veuillez entrer une rue:");
         String rue =sc.nextLine();
-        System.out.println("Entrer la localite:");
+        System.out.println("Veuillez entrer une localite:");
         String localite =sc.nextLine();
-        System.out.println("Entrer le cp:");
+        System.out.println("Veuillez entrer un cp:");
         int cp = sc.nextInt();
         sc.skip("\n");
-        System.out.println("Entrer le tel:");
+        System.out.println("Veuillez entrer un tel:");
         String tel=sc.nextLine();
 
-        formateurActuel = new Formateur(0,matricule,nom,prenom,numero,rue,localite,cp,tel);//obliger de commencer par 0 =====> ça n'existe pas dans la table 
+        formateurActuel = new Formateur(0,matricule,nom,prenom,numero,rue,localite,cp,tel);
         try {
             formateurActuel = FormateurDAO.create(formateurActuel);
             System.out.println("formateur actuel : " + formateurActuel);
@@ -367,7 +471,7 @@ public class GestionM {
 
 
         try {
-            System.out.println("Entrer le matricule du formateur :");
+            System.out.println("Veuillez entrez le matricule du formateur :");
             String matricule = sc.nextLine();
             formateurActuel = FormateurDAO.readMatricule(matricule);
             System.out.println("Formateur recherché : " + formateurActuel);
@@ -377,7 +481,10 @@ public class GestionM {
             sc.skip("\n");
             do {
                 do {
-                    System.out.println("Menu secondaire : \n\t1-Modifier \n\t2-Supprimer \n\t3-Revenir en arrière");
+                    System.out.println("Menu secondaire :");
+                    System.out.println("\t1.Modifier");
+                    System.out.println("\t2.Supprimer");
+                    System.out.println("\t3.Revenir en arrière");
                     option = sc.nextLine();
                 } while (verifier_chaine(option, "[1-3]") == false);
                 choix = Integer.parseInt(option);
@@ -401,7 +508,7 @@ public class GestionM {
     }
    
     public void rechFormNom() {
-        System.out.println("Entrer nom: ");
+        System.out.println("Veuillez saisir un nom: ");
         String nom = sc.nextLine().toLowerCase();
         try {
             List<Formateur> alc = ((FormateurDAO) FormateurDAO).rechFormNom(nom);
@@ -425,36 +532,37 @@ public class GestionM {
                     System.out.println("1.Nom et Prenom:");
                     System.out.println("2.Adresse");
                     System.out.println("3.Changer le numero de tel");
-                    System.out.println("4.Revenir au menu precedent");
+                    System.out.println("4.Revenir à la recherche du formateur");
+                    System.out.println("5.Revenir au menu Formateur");
                     option = sc.nextLine();
-                } while (verifier_chaine(option, "[1-3]") == false);
+                } while (verifier_chaine(option, "[1-5]") == false);
                 choix = Integer.parseInt(option);
                 switch (choix) {
                     case 1:
-                        System.out.println("Entrer le nom: ");
+                        System.out.println("Veuillez saisir un nom: ");
                         String nom = sc.nextLine();
                         formateurActuel.setNom(nom);
                         FormateurDAO.update(formateurActuel);
-                        System.out.println("Entrer le prenom");
+                        System.out.println("Veuillez saisir un prenom");
                         String prenom = sc.nextLine();
                         formateurActuel.setPrenom(prenom);
                         FormateurDAO.update(formateurActuel);
                         break;
                     case 2:
-                        System.out.println("Entrer le numero n: ");
+                        System.out.println("Veuillez saisir un numero : ");
                         String numero = sc.nextLine();
                         formateurActuel.setNumero(numero);
                         FormateurDAO.update(formateurActuel);
-                        System.out.println("Entrer la rue: ");
+                        System.out.println("Veuillez saisir la rue: ");
                         String rue = sc.nextLine();
                         formateurActuel.setRue(rue);
                         FormateurDAO.update(formateurActuel);
                         
-                        System.out.println("Entrer la localite: ");
+                        System.out.println("Veuillez saisir la localite: ");
                         String localite = sc.nextLine();
                         formateurActuel.setLocalite(localite);
                         FormateurDAO.update(formateurActuel);
-                        System.out.println("Entrer le cp: ");
+                        System.out.println("Veuillez saisir le code postal: ");
                         int cp = sc.nextInt();
                         formateurActuel.setCp(cp);
                         FormateurDAO.update(formateurActuel);
@@ -462,13 +570,14 @@ public class GestionM {
                         break;
                     
                     case 3: 
-                        System.out.println("Entrer le numero: ");
+                        System.out.println("Veuillez saisir un numero : ");
                         String tel =sc.nextLine();
                         formateurActuel.setTel(tel);
                         FormateurDAO.update(formateurActuel);
                         break;
-                    case 4:
+                    case 4:rechercheFormMatricule();
                         break;
+                    case 5:menuFormateur();
                 }
             } while (choix != 5);
         } catch (SQLException e) {
@@ -484,7 +593,7 @@ public class GestionM {
         }
         
     }
-   
+  //================================================================= GESTION SESSION COURS ==============================================================================  
   public void menuSessionCours(){
        
        int ch = 0;
@@ -493,7 +602,7 @@ public class GestionM {
             System.out.println(" ======  MENU SESSION EN COURS ======");
             System.out.println("1.Afficher les sessions cours pour un formateur");
             System.out.println("2.Afficher le total des heures formateurs pour une session");
-            System.out.println("3.revenir au menu principal");
+            System.out.println("3.Revenir au menu principal");
             System.out.print("choix :");
             ch = sc.nextInt();
             sc.skip("\n");
@@ -505,7 +614,7 @@ public class GestionM {
                     vueHeuresSess();
                     break;
                 case 3:
-                    //menuPrincipal();
+                    menuPrincipal();
                     break;
                 default:
                     System.out.println("choix incorrect");
@@ -515,7 +624,7 @@ public class GestionM {
         
        
    } 
-  //================================================================= Les vues ==============================================================================  
+  //================================================================= GESTION SESSION COURS : LES VUES ==============================================================================  
   
    public void vueSessionCours(){
         VueSessionCoursFormateurDAO vueSession = new VueSessionCoursFormateurDAO();
@@ -543,10 +652,14 @@ public class GestionM {
        
    }
    
+  //================================================================= Methode de Verification REGEX  ==============================================================================   
+   public boolean verifier_chaine(String ch, String regex) {
+        return ch.matches(regex);
+    }
 //=================================================================  MAIN  ==============================================================================  
    public static void main(String[] args) {
-        GestionM local = new GestionM();
-        local.gestion();
+        GestionM gestion = new GestionM();
+        gestion.menuPrincipal();
         
     }
 }
