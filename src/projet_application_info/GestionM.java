@@ -13,9 +13,12 @@ import java.util.Scanner;
 import formation.DAO.LocalDAO;
 import formation.DAO.DAO;
 import formation.DAO.FormateurDAO;
+import formation.DAO.VueHeuresSessionDAO;
+import formation.DAO.VueSessionCoursFormateurDAO;
 import formation.metier.Cours;
 import formation.metier.Formateur;
 import formation.metier.Local;
+import formation.metier.VueSessionCoursFormateur;
 import myconnections.DBConnection;
 
 public class GestionM {
@@ -27,7 +30,8 @@ public class GestionM {
     private FormateurDAO FormateurDAO; 
     Cours coursActuel = null;
     private CoursDAO CoursDAO;
-
+    private VueSessionCoursFormateurDAO VueSessionCoursFormateurDAO; 
+    private VueHeuresSessionDAO VueHeuresSessionDAO;
     public GestionM() {
     }
 
@@ -48,9 +52,14 @@ public class GestionM {
         
         CoursDAO= new CoursDAO();
         CoursDAO.setConnection(dbConnect);
+        
+        VueSessionCoursFormateurDAO= new VueSessionCoursFormateurDAO();
+        VueSessionCoursFormateurDAO.setConnection(dbConnect);
+        
+        VueHeuresSessionDAO=new VueHeuresSessionDAO();
+        VueHeuresSessionDAO.setConnection(dbConnect);
 
         int ch = 0;
-        
         do{
             System.out.println("==========MENU PRINCIPAL============");
             System.out.println("1.Cours");
@@ -73,7 +82,7 @@ public class GestionM {
                     menuLocal();
                     break;
                 case 4:
-                    //sessionCours();
+                    menuSessionCours();
                     break;
                 case 5:
                     System.exit(0);
@@ -83,8 +92,13 @@ public class GestionM {
                     
             }
         }while(ch!=5);
-       DBConnection.closeConnection();//à la fin on doit fermer
+        
+       DBConnection.closeConnection();
+        
     }
+    
+    
+//=================================================================   GESTION COURS  ==============================================================================
         public void menuCours(){
          int ch = 0;
          do {
@@ -108,7 +122,7 @@ public class GestionM {
                     //rechercheMatiere();
                     break;
                  case 4:
-                    //System.exit(0);
+                    //menuPrincipal();
                     break;
                 default:
                     System.out.println("choix incorrect");
@@ -133,7 +147,7 @@ public class GestionM {
     }
         
 
-        
+  //=================================================================   GESTION LOCAL  ==============================================================================      
         public void menuLocal(){
          int ch = 0;
          do {
@@ -158,6 +172,7 @@ public class GestionM {
                     break;
                  
                 case 4:
+                    //menuPrincipal();
                     break;
                 default:
                     System.out.println("choix incorrect");
@@ -281,7 +296,7 @@ public class GestionM {
         return ch.matches(regex);
     }
 
-    
+ //=================================================================   GESTION FORMATEUR  ==============================================================================   
    public void menuFormateur(){
        
        int ch = 0;
@@ -306,7 +321,7 @@ public class GestionM {
                     rechFormNom();
                     break;
                 case 4:
-                    System.exit(0);
+                    //menuPrincipal();
                     break;
                 default:
                     System.out.println("choix incorrect");
@@ -374,6 +389,7 @@ public class GestionM {
                         supprimerFormateur();
                         break;
                     case 3:
+                        menuFormateur();
                         break;
                 }
             } while (choix != 3);
@@ -402,10 +418,14 @@ public class GestionM {
         String option = "";
         int choix;
         try {
-            //sc.skip("\n");
+           
             do {
                 do {
-                    System.out.println("Quelle modification voulez-vous apporter ? \n\t1-Nom et Prenom: \n\t2-Adresse \n\t3-Changer le numero de tel  \n\t4-Revenir au menu precedent");
+                    System.out.println("Quelle modification voulez-vous apporter ?");
+                    System.out.println("1.Nom et Prenom:");
+                    System.out.println("2.Adresse");
+                    System.out.println("3.Changer le numero de tel");
+                    System.out.println("4.Revenir au menu precedent");
                     option = sc.nextLine();
                 } while (verifier_chaine(option, "[1-3]") == false);
                 choix = Integer.parseInt(option);
@@ -465,13 +485,68 @@ public class GestionM {
         
     }
    
+  public void menuSessionCours(){
+       
+       int ch = 0;
+         do {
+           
+            System.out.println(" ======  MENU SESSION EN COURS ======");
+            System.out.println("1.Afficher les sessions cours pour un formateur");
+            System.out.println("2.Afficher le total des heures formateurs pour une session");
+            System.out.println("3.revenir au menu principal");
+            System.out.print("choix :");
+            ch = sc.nextInt();
+            sc.skip("\n");
+            switch (ch) {
+                case 1:
+                    vueSessionCours();
+                    break;
+                case 2:
+                    vueHeuresSess();
+                    break;
+                case 3:
+                    //menuPrincipal();
+                    break;
+                default:
+                    System.out.println("choix incorrect");
+            }
+
+        } while (ch != 4);
+        
+       
+   } 
+  //================================================================= Les vues ==============================================================================  
+  
+   public void vueSessionCours(){
+        VueSessionCoursFormateurDAO vueSession = new VueSessionCoursFormateurDAO();
+        System.out.println("Entrer l'id du formateur: ");
+        int idform=sc.nextInt();
+        sc.skip("\n");
+        try{
+            System.out.println(vueSession.affichageVue(idform));
+        } catch (SQLException e) {
+            System.out.println("Erreur: "+e);
+        }
+    }
    
+   public void vueHeuresSess (){
+       VueHeuresSessionDAO vueHeureS =new VueHeuresSessionDAO();
+       System.out.println("Entrer l'id de la session en cours: ");
+       int idsess=sc.nextInt();
+       sc.skip("\n");
+       try{
+           System.out.println(vueHeureS.affichageVue(idsess));
+       }
+       catch(SQLException e){
+           System.out.println("Erreur: "+e);
+       }
+       
+   }
+   
+//=================================================================  MAIN  ==============================================================================  
    public static void main(String[] args) {
         GestionM local = new GestionM();
         local.gestion();
-        LocalDAO ld= new LocalDAO();
-        FormateurDAO fd = new FormateurDAO();
-        CoursDAO cd = new CoursDAO();
         
     }
 }

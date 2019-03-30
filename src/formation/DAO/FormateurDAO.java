@@ -4,15 +4,13 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
 import formation.metier.Formateur;
-
-
 public class FormateurDAO extends DAO <Formateur> {
     
     @Override
     public Formateur create(Formateur obj) throws SQLException {
 
         String req1 = "insert into api_formateur(matricule,nom,prenom,numero,rue,localite,cp,tel) values(?,?,?,?,?,?,?,?)";
-        String req2 = "select idform from api_formateur where LOWER(nom)=? and prenom= ?";
+        String req2 = "select idform from api_formateur where matricule=? and nom=? and prenom= ?";
         
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(req1);
                 PreparedStatement pstm2 = dbConnect.prepareStatement(req2)) {

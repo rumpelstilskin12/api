@@ -19,7 +19,7 @@ public class LocalDAO extends DAO <Local> {
     public Local create(Local obj) throws SQLException {
 
         String req1 = "insert into api_local(sigle,places,description) values(?,?,?)";
-        String req2 = "select idlocal from api_local where LOWER(sigle)=? and places= ? and description =?";
+        String req2 = "select idlocal from api_local where sigle=? and places= ? and description =?";
         
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(req1);
                 PreparedStatement pstm2 = dbConnect.prepareStatement(req2)) {
@@ -47,7 +47,12 @@ public class LocalDAO extends DAO <Local> {
             }
         }
     }
-    
+    /**
+     * 
+     * @param idlocal
+     * @return
+     * @throws SQLException 
+     */
     @Override
     public Local read (int idlocal) throws SQLException {
 
@@ -152,43 +157,6 @@ public class LocalDAO extends DAO <Local> {
         }
     }
 
-    /**
-     * Revenir après dessus
-     * méthode permettant de récupérer tous les clients portant un
-     * certain nom
-     * @param nomrech nom recherché
-     * @return liste de clients
-     * @throws SQLException nom inconnu
-     */
-     /*public List<Local> rechLocal(String localR) throws SQLException {
-        List<Local> plusieurs = new ArrayList<>();
-        String req = "select * from api_local where sigle = ?";
-
-        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
-            pstm.setString(1, localR);
-            try (ResultSet rs = pstm.executeQuery()) {
-                boolean trouve = false;
-                while (rs.next()) {
-                    trouve = true;
-                    int idlocal = rs.getInt("IDLOCAL");
-                    String sigle = rs.getString("SIGLE");
-                    int places = rs.getInt("PLACES");
-                    String description = rs.getString("DESCRIPTION");
-                    
-                    plusieurs.add(new Local(idlocal,sigle,places,description));
-                }
-
-                if (!trouve) {
-                    throw new SQLException("local inconnu");
-                } else {
-                    return plusieurs;
-                }
-            }
-        }
-        
-        
-    }
-    
      
     /** Recherche description**/
      

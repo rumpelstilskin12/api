@@ -29,7 +29,7 @@ public class CoursDAO extends DAO <Cours> {
     public Cours create(Cours obj) throws SQLException {
 
         String req1 = "insert into api_cours(matiere,heures) values(?,?)";
-        String req2 = "select idcours from api_cours where LOWER(matiere)=? and heures= ?";
+        String req2 = "select idcours from api_cours where matiere=? and heures= ?";
         
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(req1);
                 PreparedStatement pstm2 = dbConnect.prepareStatement(req2)) {
