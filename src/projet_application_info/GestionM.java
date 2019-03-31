@@ -46,7 +46,7 @@ public class GestionM {
             System.exit(1);
         }
 
-        System.out.println("connexion établie");
+        //System.out.println("connexion établie"); -----> Affichage contrôle pour voir si la connexion a été établis
 
         LocalDAO = new LocalDAO();
         LocalDAO.setConnection(dbConnect);
@@ -65,6 +65,7 @@ public class GestionM {
 
         int ch = 0;
         do {
+            
             System.out.println("==========MENU PRINCIPAL============");
             System.out.println("1.Cours");
             System.out.println("2.Formateur");
@@ -131,7 +132,7 @@ public class GestionM {
                     System.out.println("choix incorrect");
             }
 
-        } while (ch != 5);
+        } while (ch != 4);
 
     }
     //methode d'ajout de cours
@@ -169,7 +170,7 @@ public class GestionM {
                     System.out.println("Menu secondaire :");
                     System.out.println("\t1.Modifier");
                     System.out.println("\t2.Supprimer");
-                    System.out.println("\t3.Revenir au menu principal");
+                    System.out.println("\t3.Revenir au menu cours");
                     option = sc.nextLine();
                 } while (verifier_chaine(option, "[1-3]") == false);
                 choix = Integer.parseInt(option);
@@ -181,7 +182,7 @@ public class GestionM {
                         supprimerCours();
                         break;
                     case 3:
-                        menuPrincipal();
+                        menuCours();
                         break;
                 }
             } while (choix != 3);
@@ -191,7 +192,7 @@ public class GestionM {
         }
 
     }
-    //methode de recherche partielle d'un cours en focntion de sa matiere  
+    //methode de recherche partielle d'un cours en fonction de sa matiere  
 
     public void rechercheMatiere() {
         System.out.println("Veuillez entrer la matiere du cours : ");
@@ -239,7 +240,7 @@ public class GestionM {
                         menuCours();
                         break;
                 }
-            } while (choix != 4);
+            } while (choix != 3);
         } catch (SQLException e) {
             System.out.println("erreur " + e.getMessage());
         }
@@ -287,7 +288,7 @@ public class GestionM {
                     System.out.println("choix incorrect");
             }
 
-        } while (ch != 5);
+        } while (ch != 4);
 
     }
 
@@ -327,7 +328,7 @@ public class GestionM {
                     System.out.println("Menu secondaire :");
                     System.out.println("\t1.Modifier");
                     System.out.println("\t2.Supprimer");
-                    System.out.println("\t3.Revenir au menu principal");
+                    System.out.println("\t3.Revenir au menu local");
                     option = sc.nextLine();
                 } while (verifier_chaine(option, "[1-3]") == false);
                 choix = Integer.parseInt(option);
@@ -339,7 +340,7 @@ public class GestionM {
                         effacement();
                         break;
                     case 3:
-                        menuPrincipal();
+                        menuLocal();
                         break;
                 }
             } while (choix != 3);
@@ -397,7 +398,7 @@ public class GestionM {
                         menuLocal();
                         break;
                 }
-            } while (choix != 4);
+            } while (choix != 3);
         } catch (SQLException e) {
             System.out.println("erreur " + e.getMessage());
         }
@@ -445,7 +446,7 @@ public class GestionM {
                     System.out.println("choix incorrect");
             }
 
-        } while (ch != 5);
+        } while (ch != 4);
 
     }
 
@@ -497,7 +498,7 @@ public class GestionM {
                     System.out.println("Menu secondaire :");
                     System.out.println("\t1.Modifier");
                     System.out.println("\t2.Supprimer");
-                    System.out.println("\t3.Revenir en arrière");
+                    System.out.println("\t3.Revenir au menu formateur");
                     option = sc.nextLine();
                 } while (verifier_chaine(option, "[1-3]") == false);
                 choix = Integer.parseInt(option);
@@ -640,7 +641,7 @@ public class GestionM {
                     System.out.println("choix incorrect");
             }
 
-        } while (ch != 4);
+        } while (ch != 3);
 
     }
     //================================================================= GESTION SESSION COURS : LES VUES =========================================================  

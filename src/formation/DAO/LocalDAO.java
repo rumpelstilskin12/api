@@ -56,8 +56,8 @@ public class LocalDAO extends DAO <Local> {
     /**
      * 
      * @param idlocal
-     * @return
-     * @throws SQLException 
+     * @return Local trouvé
+     * @throws SQLException id local inconnu 
      */
     @Override
     public Local read (int idlocal) throws SQLException {
@@ -76,7 +76,7 @@ public class LocalDAO extends DAO <Local> {
                     return new Local(idlocal,sigle,places,description);
 
                 } else {
-                    throw new SQLException("sigle local inconnu");
+                    throw new SQLException("id local inconnu");
                 }
 
             }
