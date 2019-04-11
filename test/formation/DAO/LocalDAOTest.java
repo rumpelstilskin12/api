@@ -90,19 +90,20 @@ public class LocalDAOTest {
      * Test of readSigle method, of class LocalDAO.
      * @throws java.lang.Exception
      */
-   /*@Test
+    @Test
     public void testReadSigle() throws Exception {
-        System.out.println("read");
+        System.out.println("readSigle");
+        String sigle="";
         LocalDAO instance = new LocalDAO();
         instance.setConnection(dbConnect);
         Local obj = new Local(0,"TeS",10,"description");
         Local expResult = instance.create(obj);
-        String Sigle=expResult.getSigle();
-        Local result = instance.readSigle(Sigle);
-        assertEquals("TeS",expResult.getSigle(), result.getSigle());//sigle different
+        sigle=expResult.getSigle();
+        Local result = instance.readSigle(sigle);
+        assertEquals("Sigles différents",expResult.getSigle(), result.getSigle());//sigle different
         try{
-            result=instance.readSigle(Sigle);
-            fail("exception");
+            result=instance.read(0);
+            fail("Exception d'un code inconnu");
         }
         catch(SQLException e){}
        instance.delete(result);
