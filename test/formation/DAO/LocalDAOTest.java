@@ -8,6 +8,7 @@ package formation.DAO;
 import formation.metier.Local;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import myconnections.DBConnection;
 import org.junit.After;
@@ -89,16 +90,23 @@ public class LocalDAOTest {
      * Test of readSigle method, of class LocalDAO.
      * @throws java.lang.Exception
      */
-    @Test
+   /*@Test
     public void testReadSigle() throws Exception {
-        System.out.println("readSigle");
-        String sigle = "";
+        System.out.println("read");
         LocalDAO instance = new LocalDAO();
-        Local expResult = null;
-        Local result = instance.readSigle(sigle);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.setConnection(dbConnect);
+        Local obj = new Local(0,"TeS",10,"description");
+        Local expResult = instance.create(obj);
+        String Sigle=expResult.getSigle();
+        Local result = instance.readSigle(Sigle);
+        assertEquals("TeS",expResult.getSigle(), result.getSigle());//sigle different
+        try{
+            result=instance.readSigle(Sigle);
+            fail("exception");
+        }
+        catch(SQLException e){}
+       instance.delete(result);
+
     }
  
     /**
@@ -112,7 +120,7 @@ public class LocalDAOTest {
         int idlocal = 0;
         LocalDAO instance = new LocalDAO();
         instance.setConnection(dbConnect);
-        Local obj = new Local(0, "TestSigle",10, "TestDescription");
+        Local obj = new Local(0, "TeS",10, "TestDescription");
         Local expResult = instance.create(obj);
         idlocal = expResult.getIdlocal();
         Local result = instance.read(idlocal);
@@ -136,13 +144,11 @@ public class LocalDAOTest {
     @Test
     public void testUpdate() throws Exception {
         System.out.println("update");
- 
-        System.out.println("update");
-        Local obj = new Local(0, "TestSigle",10, "TestDescription");
+        Local obj = new Local(0, "TeS",10, "TestDescription");
         LocalDAO instance = new LocalDAO();
         instance.setConnection(dbConnect);
         obj = instance.create(obj);
-        obj.setSigle("TestSigle2");
+        obj.setSigle("TeS");
        
         Local expResult = obj;
         Local result = instance.update(obj);
@@ -158,10 +164,9 @@ public class LocalDAOTest {
      */
     @Test
     public void testDelete() throws Exception {
-        System.out.println("delete");
  
         System.out.println("delete");
-        Local obj = new Local(0, "TestSigle",10, "TestDescription");
+        Local obj = new Local(0, "TeS",10, "TestDescription");
         LocalDAO instance = new LocalDAO();
         instance.setConnection(dbConnect);
         obj = instance.create(obj);
@@ -184,9 +189,9 @@ public class LocalDAOTest {
         String descriptionrech = "";
        
        
-        Local obj1 = new Local(0,"TestSigle",10,"TestDescription");
-        Local obj2 = new Local(0,"TestSigle2",10,"TestDescription2");
-        String nomrech = "TestSigle";
+        Local obj1 = new Local(0,"TeS",10,"testdescription");
+        Local obj2 = new Local(0,"TsF",8,"testdescription");
+        descriptionrech = "testdescription";
         LocalDAO instance = new LocalDAO();
         instance.setConnection(dbConnect);
         obj1=instance.create(obj1);

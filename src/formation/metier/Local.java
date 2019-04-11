@@ -1,6 +1,8 @@
 
 package formation.metier;
 
+import java.util.Objects;
+
 /**
  * classe métier de gestion d'un local
  * @author Walid Kherbache
@@ -26,6 +28,30 @@ public class Local {
         this.sigle = sigle;
         this.places = places;
         this.description = description;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Local other = (Local) obj;
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        return true;
     }
 
     public int getIdlocal() {

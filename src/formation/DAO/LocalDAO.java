@@ -13,7 +13,7 @@ import formation.metier.Local;
  * @see Local
  */
 public class LocalDAO extends DAO <Local> {
-
+   
     /**
      * création d'un local sur base des valeurs de son objet métier
      *
