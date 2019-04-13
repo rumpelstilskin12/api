@@ -27,7 +27,7 @@ public class FormateurDAO extends DAO <Formateur> {
     public Formateur create(Formateur obj) throws SQLException {
 
         String req1 = "insert into api_formateur(matricule,nom,prenom,numero,rue,localite,cp,tel) values(?,?,?,?,?,?,?,?)";
-        String req2 = "select idform from api_formateur where matricule=? and nom=? and prenom= ?";
+        String req2 = "select idform from api_formateur where matricule=? and nom=? and prenom=?";
         
         try (PreparedStatement pstm1 = dbConnect.prepareStatement(req1);
                 PreparedStatement pstm2 = dbConnect.prepareStatement(req2)) {
@@ -47,8 +47,9 @@ public class FormateurDAO extends DAO <Formateur> {
             if (n == 0) {
                 throw new SQLException("erreur d'insertion de formateur, aucun formateur n'a été inseré");
             }
-            pstm2.setString(1, obj.getNom());
-            pstm2.setString(2, obj.getPrenom());
+            pstm2.setString(1, obj.getMatricule());
+            pstm2.setString(2, obj.getNom());
+            pstm2.setString(3, obj.getPrenom());
             
             try (ResultSet rs = pstm2.executeQuery()) {
                 if (rs.next()) {

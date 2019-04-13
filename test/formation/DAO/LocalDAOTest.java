@@ -5,10 +5,15 @@
  */
 package formation.DAO;
 
+import formation.metier.Cours;
+import formation.metier.Formateur;
+import formation.metier.Infos;
 import formation.metier.Local;
+import formation.metier.SessionCours;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import myconnections.DBConnection;
 import org.junit.After;
@@ -177,6 +182,38 @@ public class LocalDAOTest {
             fail("exception de record introuvable non générée");
         } catch (SQLException e) {
         }
+         obj=instance.create(obj);
+        Cours cours=new Cours(0,"testmatiere",10);
+       CoursDAO coursd= new CoursDAO();
+       coursd.setConnection(dbConnect);
+       cours=coursd.create(cours);
+       
+        Formateur formateur=new Formateur(0,"Testmatricule","Testnom","Testprenom","10","Testrue","Testlocalite",6025,"Testtel");
+        FormateurDAO formateurd=new FormateurDAO();
+        formateurd.setConnection(dbConnect);
+        formateur=formateurd.create(formateur);
+        
+        SessionCours sessionCours=new SessionCours(0,LocalDate.of(2018, Month.APRIL, 12),LocalDate.of(2019, Month.MARCH, 13),15,obj.getIdlocal(),cours.getIdcours());
+        SessionCoursDAO sessionCoursd= new SessionCoursDAO();
+        sessionCoursd.setConnection(dbConnect);
+        sessionCours=sessionCoursd.create(sessionCours);
+        
+        
+        Infos infos = new Infos(0,10,formateur.getIdform(),sessionCours.getIdsesscours());
+        InfosDAO infosd= new InfosDAO();
+        infosd.setConnection(dbConnect);
+        infos=infosd.create(infos);
+        
+        try{
+            instance.delete(obj);
+            fail("Exception de record de parent clé etrangere");
+        }
+        catch(Exception e){}
+        infosd.delete(infos);
+        sessionCoursd.delete(sessionCours);
+        formateurd.delete(formateur);
+        coursd.delete(cours);
+        instance.delete(obj);
  
     }
  

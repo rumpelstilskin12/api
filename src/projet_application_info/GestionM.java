@@ -13,11 +13,15 @@ import java.util.Scanner;
 import formation.DAO.LocalDAO;
 import formation.DAO.DAO;
 import formation.DAO.FormateurDAO;
+import formation.DAO.InfosDAO;
+import formation.DAO.SessionCoursDAO;
 import formation.DAO.VueHeuresSessionDAO;
 import formation.DAO.VueSessionCoursFormateurDAO;
 import formation.metier.Cours;
 import formation.metier.Formateur;
+import formation.metier.Infos;
 import formation.metier.Local;
+import formation.metier.SessionCours;
 import formation.metier.VueSessionCoursFormateur;
 import myconnections.DBConnection;
 
@@ -30,6 +34,8 @@ public class GestionM {
     private FormateurDAO FormateurDAO;
     Cours coursActuel = null;
     private CoursDAO CoursDAO;
+    SessionCours sessionCoursActuel= null;
+    private SessionCoursDAO SessionCoursDAO;
     private VueSessionCoursFormateurDAO VueSessionCoursFormateurDAO;
     private VueHeuresSessionDAO VueHeuresSessionDAO;
 
@@ -62,6 +68,9 @@ public class GestionM {
 
         VueHeuresSessionDAO = new VueHeuresSessionDAO();
         VueHeuresSessionDAO.setConnection(dbConnect);
+        
+        SessionCoursDAO = new SessionCoursDAO();
+        SessionCoursDAO.setConnection(dbConnect);
 
         int ch = 0;
         do {
@@ -623,7 +632,8 @@ public class GestionM {
             System.out.println(" ======  MENU SESSION EN COURS ======");
             System.out.println("1.Afficher les sessions cours pour un formateur");
             System.out.println("2.Afficher le total des heures formateurs pour une session");
-            System.out.println("3.Revenir au menu principal");
+            System.out.println("3.Création d'une session en cours");
+            System.out.println("4.Revenir au menu principal");
             System.out.print("choix :");
             ch = sc.nextInt();
             sc.skip("\n");
@@ -635,21 +645,101 @@ public class GestionM {
                     vueHeuresSess();
                     break;
                 case 3:
+                    creationSessCours();
+                    break;
+                case 4:
                     menuPrincipal();
                     break;
                 default:
                     System.out.println("choix incorrect");
             }
 
-        } while (ch != 3);
+        } while (ch != 4);
 
+    }
+    
+    //création d'une session de cours
+    
+    public void creationSessCours(){
+         //===================================Date Debut==================================
+        System.out.println("Veuillez entrer la date de debut de la session en cours : \n");
+        System.out.println("Entrer l'année : ");
+        int annee = sc.nextInt();
+        sc.skip("\n");
+        System.out.println("Entrer le Mois : ");
+        int mois = sc.nextInt();
+        sc.skip("\n");
+        System.out.println("Entrer le jour : ");
+        int jour = sc.nextInt();
+        sc.skip("\n");
+
+        LocalDate dateDebut = LocalDate.of(annee, mois, jour);
+        System.out.println(dateDebut);
+        //=====================================Date fin======================================
+        System.out.println("Veuillez entrer la date de fin de la session en cours : \n");
+        System.out.println("Entrer l'année : ");
+        int annee1 = sc.nextInt();
+        sc.skip("\n");
+        System.out.println("Entrer le Mois : ");
+        int mois1 = sc.nextInt();
+        sc.skip("\n");
+        System.out.println("Entrer le jour : ");
+        int jour1 = sc.nextInt();
+        sc.skip("\n");
+
+        LocalDate dateFin = LocalDate.of(annee1, mois1, jour1);
+
+        System.out.println(dateFin);
+
+        System.out.println("Nbr. d'étudiants inscrits : ");
+        int nbreinscrits = sc.nextInt();
+        sc.skip("\n");
+
+        System.out.println("Identifiant du local : ");
+        int idlocal = sc.nextInt();
+        sc.skip("\n");
+
+        System.out.println("Identifiant du cours : ");
+        int idcours = sc.nextInt();
+        sc.skip("\n");
+
+        sessionCoursActuel = new SessionCours(0, dateDebut, dateFin, nbreinscrits, idlocal, idcours);
+
+              
+        try {
+
+            sessionCoursActuel = SessionCoursDAO.create(sessionCoursActuel);
+            System.out.println("Session cours actuelle : " + sessionCoursActuel);
+
+        } catch (SQLException e) {
+            System.out.println("Erreur au niveau de la création de la session cours,idlocal ou idcours non valide!  : " + e);
+        }
+        
+        System.out.println("Veuillez entrer l'id du formateur responsable de la session de cours :");
+        int idform = sc.nextInt();
+        sc.skip("\n");
+        
+        System.out.println("Veuillez entrer le nombre d'heures de cours données par le formateur : ");
+        int nbrheure = sc.nextInt();
+        sc.skip("\n");
+        
+        Infos infos = new Infos(0,idform,sessionCoursActuel.getIdsesscours(),nbrheure);
+        InfosDAO infod = new InfosDAO();
+        try {
+
+            infos = infod.create(infos);
+            System.out.println("Session cours actuelle : " + infos);
+
+        } catch (SQLException e) {
+            System.out.println("Erreur au niveau de la création infos : " + e);
+        }
     }
     //================================================================= GESTION SESSION COURS : LES VUES =========================================================  
     //methode d'affichage de la vue SessionCoursFormateur en fonction de son identifiant formateur
 
     public void vueSessionCours() {
         VueSessionCoursFormateurDAO vueSession = new VueSessionCoursFormateurDAO();
-        System.out.println("Entrer l'id du formateur: ");
+        System.out.println("Veuillez entrer l'id du formateur: ");
         int idform = sc.nextInt();
         sc.skip("\n");
         try {
@@ -662,7 +752,7 @@ public class GestionM {
 
     public void vueHeuresSess() {
         VueHeuresSessionDAO vueHeureS = new VueHeuresSessionDAO();
-        System.out.println("Entrer l'id de la session en cours: ");
+        System.out.println("Veuillez entrer l'id de la session en cours: ");
         int idsess = sc.nextInt();
         sc.skip("\n");
         try {
