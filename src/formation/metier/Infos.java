@@ -56,6 +56,11 @@ public class Infos {
     public void setIdsesscours(int idsesscours) {
         this.idsesscours = idsesscours;
     }
+
+    @Override
+    public String toString() {
+        return "Infos{" + "idinfos=" + idinfos + ", nb=" + nb + ", idform=" + idform + ", idsesscours=" + idsesscours + '}';
+    }
     
     
     
