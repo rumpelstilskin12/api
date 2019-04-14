@@ -214,7 +214,7 @@ public class LocalDAOTest {
         formateurd.delete(formateur);
         coursd.delete(cours);
         instance.delete(obj);
- 
+        
     }
  
     /**

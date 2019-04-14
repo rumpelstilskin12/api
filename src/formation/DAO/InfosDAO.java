@@ -46,7 +46,7 @@ public class InfosDAO extends DAO <Infos> {
                     obj.setIdinfos(idinfos);
                     return read(idinfos);
                 } else {
-                    throw new SQLException("Erreur de création dans la table infos, introuvable");
+                    throw new SQLException("Erreur de création d'infos, introuvable");
                 }
             }
         
@@ -69,7 +69,7 @@ public class InfosDAO extends DAO <Infos> {
 
                     return new Infos(idinfos,nb,idform, idsesscours);
                 } else {
-                    throw new SQLException("Formateur inconnu");
+                    throw new SQLException("infos inconnu");
                 }
 
             }
@@ -106,10 +106,10 @@ public class InfosDAO extends DAO <Infos> {
             pstm.setInt(1, obj.getIdinfos());
             int n = pstm.executeUpdate();
 
-            System.out.println("Ligne de la table infos a été correctement supprimé de la base de données ! ");
+            System.out.println("infos a bien été surpprimé ");
 
         } catch (SQLException e) {
-            System.out.println("Aucune ligne effacée : le formateur n'existe pas dans la BDD !");
+            System.out.println("Aucune ligne effacée : infos n'existe pas dans la bd ");
         }
     }
 

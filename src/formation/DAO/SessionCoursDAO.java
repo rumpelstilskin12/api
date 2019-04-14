@@ -6,10 +6,14 @@
 package formation.DAO;
 
 import formation.metier.SessionCours;
+import formation.metier.VueSessionCoursFormateur;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import myconnections.DBConnection;
 
 /**
  *
@@ -123,10 +127,45 @@ public class SessionCoursDAO extends DAO <SessionCours> {
             pstm.setInt(1, obj.getIdsesscours());
             int n = pstm.executeUpdate();
 
-            System.out.println("La session de cours a été correctement supprimée de la base de données ! ");
+            System.out.println("La session de cours a bien été supprimée ! ");
 
         } catch (SQLException e) {
             System.out.println("Aucune ligne effacée : la session de cours n'existe pas dans la BDD !");
+        }
+    }
+     /**
+     * Methode permettant de recuperer la sessioncours d'un formateur 
+     *
+     * @throws SQLException erreur element inconnu
+     */ 
+ 
+    public List<VueSessionCoursFormateur> rech(int idform) throws SQLException {
+        List<VueSessionCoursFormateur> vue = new ArrayList<>();
+        String req = "select * from session_cours_formateur where idform= ?";
+        dbConnect=DBConnection.getConnection();
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+            pstm.setInt(1, idform);
+            try (ResultSet rs = pstm.executeQuery()) {
+                boolean trouve = false;
+                while (rs.next()) {
+                    trouve = true;
+                    
+                   
+                    String nom = rs.getString("NOM");
+                    String prenom = rs.getString("PRENOM");
+                    String matiere = rs.getString("MATIERE");
+                    LocalDate datedebut = rs.getDate("DATEDEBUT").toLocalDate();
+                    LocalDate datefin = rs.getDate("DATEFIN").toLocalDate();
+                    int nbreinscrits = rs.getInt("NbreInscrits");
+                    vue.add(new VueSessionCoursFormateur(idform,nom,prenom,matiere,datedebut,datefin,nbreinscrits));
+                }
+
+                if (!trouve) {
+                    throw new SQLException("Element inconnu");
+                } else {
+                    return vue;
+                }
+            }
         }
     }
 }

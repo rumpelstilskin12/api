@@ -35,6 +35,8 @@ public class GestionM {
     Cours coursActuel = null;
     private CoursDAO CoursDAO;
     SessionCours sessionCoursActuel= null;
+    private InfosDAO InfosDAO;
+    Infos infosActuel=null; 
     private SessionCoursDAO SessionCoursDAO;
     private VueSessionCoursFormateurDAO VueSessionCoursFormateurDAO;
     private VueHeuresSessionDAO VueHeuresSessionDAO;
@@ -62,7 +64,10 @@ public class GestionM {
 
         CoursDAO = new CoursDAO();
         CoursDAO.setConnection(dbConnect);
-
+        
+        InfosDAO = new InfosDAO(); 
+        InfosDAO.setConnection(dbConnect);
+        
         VueSessionCoursFormateurDAO = new VueSessionCoursFormateurDAO();
         VueSessionCoursFormateurDAO.setConnection(dbConnect);
 
@@ -80,7 +85,8 @@ public class GestionM {
             System.out.println("2.Formateur");
             System.out.println("3.Local");
             System.out.println("4.SessionCours");
-            System.out.println("5.Quitter");
+            System.out.println("5.Infos");
+            System.out.println("6.Quitter");
             System.out.println("choix:");
             ch = sc.nextInt();
             sc.skip("\n");
@@ -99,13 +105,16 @@ public class GestionM {
                     menuSessionCours();
                     break;
                 case 5:
+                    menuInfos();
+                    break;
+                case 6:
                     System.exit(0);
                     break;
                 default:
                     System.out.println("Choix incorrect");
 
             }
-        } while (ch != 5);
+        } while (ch != 6);
 
         DBConnection.closeConnection();
     }
@@ -734,6 +743,53 @@ public class GestionM {
             System.out.println("Erreur au niveau de la création infos : " + e);
         }
     }
+    //======================================================================Infos===============================================================
+    //creation infos
+    public void menuInfos() {
+
+        int ch = 0;
+        do {
+
+            System.out.println(" ======  MENU INFOS======");
+            System.out.println("1.Creation infos");
+            System.out.println("2.Revenir au menu principal");
+            System.out.print("choix :");
+            ch = sc.nextInt();
+            sc.skip("\n");
+            switch (ch) {
+                case 1:
+                    creationInfos();
+                    break;
+                case 2:
+                    menuPrincipal();
+                    break;
+                default:
+                    System.out.println("choix incorrect");
+            }
+
+        } while (ch != 2);
+
+    }
+    public void creationInfos(){
+         System.out.print("Veuillez entrer un nbr d'heure:");
+         int nb = sc.nextInt();
+        System.out.print("Veuillez entrer un idform:");
+        int idform = sc.nextInt();
+        System.out.print("Veuillez entrer un idsesscours:");
+        int idsesscours = sc.nextInt();
+        
+
+        infosActuel = new Infos(0,nb,idform,idsesscours);
+        try {
+            infosActuel = InfosDAO.create(infosActuel);
+            System.out.println("infos actuel : " + infosActuel);
+        } catch (SQLException e) {
+            System.out.println("erreur :" + e);
+        }
+
+    }
+    
+    
     //================================================================= GESTION SESSION COURS : LES VUES =========================================================  
     //methode d'affichage de la vue SessionCoursFormateur en fonction de son identifiant formateur
 

@@ -1,5 +1,8 @@
 
 package formation.metier;
+
+import java.util.Objects;
+
 /**
  * classe metier de gestion de formateurs
  * @author Walid Kherbache
@@ -108,6 +111,30 @@ public class Formateur {
     @Override
     public String toString() {
         return "Formateur{" + "idform=" + idform + ", matricule=" + matricule + ", nom=" + nom + ", prenom=" + prenom + ", numero=" + numero + ", rue=" + rue + ", localite=" + localite + ", cp=" + cp + ", tel=" + tel + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Formateur other = (Formateur) obj;
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
+        return true;
     }
     
     

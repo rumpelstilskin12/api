@@ -58,20 +58,19 @@ public class CoursDAOTest {
        System.out.println("create");
  
        
-        Cours obj = new Cours(0, "testmatiere",10);
+        Cours obj = new Cours(0, "testmatiere",8);
         CoursDAO instance = new CoursDAO();
         instance.setConnection(dbConnect);
-        Cours expResult = new Cours(0, "testmatiere",10);
+        Cours expResult = new Cours(0, "testmatiere",8);
         Cours result = instance.create(obj);
- 
-        assertEquals("Idcours différents", expResult.getIdcours(), result.getIdcours());
+
         assertEquals("Matieres différentes", expResult.getMatiere(), result.getMatiere());
         assertEquals("Heures différentes", expResult.getHeures(), result.getHeures());
         //etc
         assertNotEquals("id non généré", expResult.getIdcours(), result.getIdcours());
         int idcours = result.getIdcours();
  
-        obj = new Cours(0, "testmatiere2",10);
+        obj = new Cours(0, "testmatiere",8);
  
         try {
             obj = instance.create(obj);
@@ -89,29 +88,48 @@ public class CoursDAOTest {
      */
     @Test
     public void testRead() throws Exception {
-        System.out.println("read");
+       System.out.println("read");
         int idcours = 0;
         CoursDAO instance = new CoursDAO();
-        Cours expResult = null;
+        instance.setConnection(dbConnect);
+        Cours obj = new Cours(0, "testmatiere", 8);
+        Cours expResult = instance.create(obj);
+        idcours = expResult.getIdcours();
         Cours result = instance.read(idcours);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("Matiere différentes", expResult.getMatiere(), result.getMatiere());
+        assertEquals("Heures différentes", expResult.getHeures(), result.getHeures());
+
+        assertEquals("id différents", expResult.getIdcours(), result.getIdcours());
+        try {
+            result = instance.read(0);
+            fail("exception d'id inconnu non générée");
+        } catch (SQLException e) {
+        }
+        instance.delete(result);
     }
 
+    
     /**
      * Test of update method, of class CoursDAO.
      */
     @Test
     public void testUpdate() throws Exception {
-        System.out.println("update");
-        Cours obj = null;
+         System.out.println("update");
+
         CoursDAO instance = new CoursDAO();
-        Cours expResult = null;
+        Cours obj = new Cours(0, "testmatiere", 8);
+        instance.setConnection(dbConnect);
+
+        obj = instance.create(obj);
+      //  obj.setMatiere("TestUpdateMatiere");
+        obj.setHeures(50);
+
+        Cours expResult = obj;
         Cours result = instance.update(obj);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       // assertEquals(expResult.getMatiere(), result.getMatiere());
+        assertEquals(expResult.getHeures(), result.getHeures());
+
+        instance.delete(obj);
     }
 
     /**
@@ -120,11 +138,16 @@ public class CoursDAOTest {
     @Test
     public void testDelete() throws Exception {
         System.out.println("delete");
-        Cours obj = null;
+        Cours obj = new Cours(0, "testmatiere", 8);
         CoursDAO instance = new CoursDAO();
+        instance.setConnection(dbConnect);
+        obj = instance.create(obj);
         instance.delete(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {
+            instance.read(obj.getIdcours());
+            fail("exception de record introuvable non générée");
+        } catch (SQLException e) {
+        }
     }
 
     /**
@@ -133,13 +156,23 @@ public class CoursDAOTest {
     @Test
     public void testRechCoursMat() throws Exception {
         System.out.println("rechCoursMat");
-        String coursRechMatiere = "";
+        String matiererech = "";
+       
+       
+        Cours obj1 = new Cours(0,"testmatiere",10);
+        Cours obj2 = new Cours(0,"testmatiere2",8);
+        matiererech = "testmatiere";
         CoursDAO instance = new CoursDAO();
-        List<Cours> expResult = null;
-        List<Cours> result = instance.rechCoursMat(coursRechMatiere);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.setConnection(dbConnect);
+        obj1=instance.create(obj1);
+        obj2=instance.create(obj2);
+       
+     
+        List<Cours> result = instance.rechCoursMat(matiererech);
+        if(result.indexOf(obj1)<0) fail("record introuvable "+obj1);
+        if(result.indexOf(obj2)<0) fail("record introuvable"+obj2);
+        instance.delete(obj1);
+        instance.delete(obj2);
     }
     
 }
