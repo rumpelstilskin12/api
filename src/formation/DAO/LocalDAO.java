@@ -4,6 +4,7 @@ package formation.DAO;
 import java.sql.*;
 import java.util.*;
 import formation.metier.Local;
+import formation.metier.SessionCours;
 
 /**
  * classe de mappage poo-relationnel local
