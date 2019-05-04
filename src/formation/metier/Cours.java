@@ -1,7 +1,9 @@
 
 package formation.metier;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * classe metier de gestion de cours
@@ -13,7 +15,7 @@ public class Cours {
     protected int idcours;
     protected String matiere;
     protected int heures;
-
+    private Set <SessionCours> sessioncours=new HashSet<>();
     public Cours() {
     }
 

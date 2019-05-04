@@ -35,6 +35,72 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="MenuCours">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cours"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itemCreatC">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="cr&#xe9;er "/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemCreatCActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemRechIdcours">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="recherche par idcours"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemRechMat">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="recherche par matiere"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="MenuFormateur">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Formateur"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itemCreatF">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="cr&#xe9;er"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemCreatFActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemRechMatricule">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="recherche par matricule"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemRechMatriculeActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemRechNom">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="recherche par nom"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemRechNomActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="MenuSessionCours">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="SessionCours"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="MenuInfos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Infos"/>
+          </Properties>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
@@ -79,6 +145,20 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
           <CardConstraints cardName="cardRechSigle"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="formation.graph.CreationCours" name="creationCours1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="cardCreationCours"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="formation.graph.CreationFormateur" name="creationFormateur1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="cardCreationFormateur"/>
         </Constraint>
       </Constraints>
     </Component>
