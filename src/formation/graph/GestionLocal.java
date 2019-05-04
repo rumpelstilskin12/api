@@ -5,6 +5,11 @@
  */
 package formation.graph;
 
+import formation.DAO.LocalDAO;
+import java.awt.CardLayout;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import myconnections.DBConnection;
 /**
  *
  * @author BARCA
@@ -14,8 +19,23 @@ public class GestionLocal extends javax.swing.JFrame {
     /**
      * Creates new form GestionLocal
      */
+    CardLayout cardl;
     public GestionLocal() {
         initComponents();
+        cardl=(CardLayout)this.getContentPane().getLayout();
+         Connection dbConnect = DBConnection.getConnection();
+   
+        if (dbConnect == null) {
+            System.out.println("connection invalide");
+            JOptionPane.showMessageDialog(this,"connexion invalide","ERREUR",JOptionPane.ERROR_MESSAGE);
+        }
+         
+ 
+    LocalDAO localDAO = new LocalDAO();
+    localDAO.setConnection(dbConnect);
+    creationLocal1.setLocalDAO(localDAO);
+    rechLocalDescription1.setLocalDAO(localDAO);
+    rechLocalSigle1.setLocalDAO(localDAO);
     }
 
     /**
@@ -27,26 +47,35 @@ public class GestionLocal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rechLocalDescription1 = new formation.graph.RechLocalDescription();
+        rechLocalSigle1 = new formation.graph.RechLocalSigle();
+        creationLocal1 = new formation.graph.CreationLocal();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        MenuLocal = new javax.swing.JMenu();
+        itemCreat = new javax.swing.JMenuItem();
+        itemRechS = new javax.swing.JMenuItem();
+        itemRechDesc = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.CardLayout());
+        getContentPane().add(rechLocalDescription1, "card3");
+        getContentPane().add(rechLocalSigle1, "card4");
+        getContentPane().add(creationLocal1, "card4");
 
-        jMenu1.setText("Local");
-        jMenuBar1.add(jMenu1);
+        MenuLocal.setText("Local");
+
+        itemCreat.setText("créer");
+        MenuLocal.add(itemCreat);
+
+        itemRechS.setText("recherche par sigle");
+        MenuLocal.add(itemRechS);
+
+        itemRechDesc.setText("recherche par description");
+        MenuLocal.add(itemRechDesc);
+
+        jMenuBar1.add(MenuLocal);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 505, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -87,7 +116,13 @@ public class GestionLocal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu MenuLocal;
+    private formation.graph.CreationLocal creationLocal1;
+    private javax.swing.JMenuItem itemCreat;
+    private javax.swing.JMenuItem itemRechDesc;
+    private javax.swing.JMenuItem itemRechS;
     private javax.swing.JMenuBar jMenuBar1;
+    private formation.graph.RechLocalDescription rechLocalDescription1;
+    private formation.graph.RechLocalSigle rechLocalSigle1;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,10 @@
  */
 package formation.graph;
 
+import formation.DAO.LocalDAO;
+import formation.metier.Local;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author BARCA
@@ -14,9 +18,16 @@ public class RechLocalSigle extends javax.swing.JPanel {
     /**
      * Creates new form RechLocalSigle
      */
+    LocalDAO localDAO=null;
+    Local loc=null;
     public RechLocalSigle() {
         initComponents();
+        
     }
+    public void setLocalDAO(LocalDAO localDAO){
+        this.localDAO=localDAO;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,12 +41,14 @@ public class RechLocalSigle extends javax.swing.JPanel {
         labelSigle = new javax.swing.JLabel();
         labelPlaces = new javax.swing.JLabel();
         labelDescription = new javax.swing.JLabel();
-        javax.swing.JTextField txtSigle = new javax.swing.JTextField();
         txtPlaces = new javax.swing.JTextField();
         txtDescription = new javax.swing.JTextField();
         btRecherche = new javax.swing.JButton();
         btMaj = new javax.swing.JButton();
         btEffacer = new javax.swing.JButton();
+        labelIdlocal = new javax.swing.JLabel();
+        txtIdlocal = new javax.swing.JTextField();
+        txtSigle = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(51, 204, 255));
 
@@ -66,6 +79,10 @@ public class RechLocalSigle extends javax.swing.JPanel {
             }
         });
 
+        labelIdlocal.setText("Idlocal");
+
+        txtIdlocal.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,17 +97,21 @@ public class RechLocalSigle extends javax.swing.JPanel {
                         .addGap(39, 39, 39)
                         .addComponent(btEffacer, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelDescription)
-                        .addGap(152, 152, 152)
-                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelSigle)
+                            .addComponent(labelIdlocal))
+                        .addGap(174, 174, 174)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtIdlocal)
+                            .addComponent(txtSigle, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelDescription)
                             .addComponent(labelPlaces))
-                        .addGap(179, 179, 179)
+                        .addGap(152, 152, 152)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPlaces, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSigle, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,11 +121,15 @@ public class RechLocalSigle extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelSigle)
                     .addComponent(txtSigle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelIdlocal)
+                    .addComponent(txtIdlocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPlaces)
                     .addComponent(txtPlaces, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDescription)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,14 +144,50 @@ public class RechLocalSigle extends javax.swing.JPanel {
 
     private void btRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRechercheActionPerformed
         // TODO add your handling code here:
+        try{
+             String sigle= txtSigle.getText();
+             loc=localDAO.readSigle(sigle);
+             txtIdlocal.setText(""+loc.getIdlocal());
+             txtPlaces.setText(""+loc.getPlaces());
+             txtDescription.setText(loc.getDescription());
+             JOptionPane.showMessageDialog(this,"local trouvé","succès",JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btRechercheActionPerformed
-
+    }
     private void btMajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMajActionPerformed
         // TODO add your handling code here:
+        try{  
+       String sigle=txtSigle.getText();
+       int idlocal=Integer.parseInt(txtIdlocal.getText());
+       int places=Integer.parseInt(txtPlaces.getText());
+       String description=txtDescription.getText();
+       Local loc = new Local(idlocal,sigle,places,description);
+       localDAO.update(loc);
+       JOptionPane.showMessageDialog(this,"local mis à jour","succès",JOptionPane.INFORMATION_MESSAGE);
+       
+     }
+     catch(Exception e){
+        JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+     }
+        
     }//GEN-LAST:event_btMajActionPerformed
 
     private void btEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEffacerActionPerformed
         // TODO add your handling code here:
+        try{
+             String sigle=txtSigle.getText();
+             localDAO.delete(loc);
+             txtIdlocal.setText("");
+             txtPlaces.setText("");
+             txtDescription.setText("");
+             
+             JOptionPane.showMessageDialog(this,"local effacé","succès",JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+     }
     }//GEN-LAST:event_btEffacerActionPerformed
 
 
@@ -135,9 +196,12 @@ public class RechLocalSigle extends javax.swing.JPanel {
     private javax.swing.JButton btMaj;
     private javax.swing.JButton btRecherche;
     private javax.swing.JLabel labelDescription;
+    private javax.swing.JLabel labelIdlocal;
     private javax.swing.JLabel labelPlaces;
     private javax.swing.JLabel labelSigle;
     private javax.swing.JTextField txtDescription;
+    private javax.swing.JTextField txtIdlocal;
     private javax.swing.JTextField txtPlaces;
+    private javax.swing.JTextField txtSigle;
     // End of variables declaration//GEN-END:variables
 }

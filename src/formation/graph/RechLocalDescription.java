@@ -5,6 +5,13 @@
  */
 package formation.graph;
 
+import formation.DAO.LocalDAO;
+import formation.metier.Local;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author BARCA
@@ -14,10 +21,23 @@ public class RechLocalDescription extends javax.swing.JPanel {
     /**
      * Creates new form RechLocalDescription
      */
+    LocalDAO localDAO=null;
+    Local loc=null;
+    
+    DefaultTableModel dft1 = new DefaultTableModel();
     public RechLocalDescription() {
         initComponents();
-    }
+        initComponents();
+        dft1.addColumn("idlocal");
+        dft1.addColumn("sigle");
+        dft1.addColumn("places");
+        dft1.addColumn("description");
+        jTable2.setModel(dft1);
 
+    }
+     public void setLocalDAO(LocalDAO localDAO){
+        this.localDAO=localDAO;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,6 +104,24 @@ public class RechLocalDescription extends javax.swing.JPanel {
 
     private void txtnom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnom1ActionPerformed
         // TODO add your handling code here:
+         try{ 
+        String nomRech=txtnom1.getText();
+        List<Local> al= localDAO.rechLocalDesc(nomRech);
+        int nr = dft1.getRowCount();
+        for(int i=nr-1;i>=0;i--)dft1.removeRow(i);
+        for(Local loc:al){
+            Vector v = new Vector();
+            v.add(loc.getIdlocal());
+            v.add(loc.getSigle());
+            v.add(loc.getPlaces());
+            v.add(loc.getDescription());
+            dft1.addRow(v);
+           
+        }
+       }
+       catch(Exception e){
+           JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+       }
     }//GEN-LAST:event_txtnom1ActionPerformed
 
 

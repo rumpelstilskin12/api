@@ -5,6 +5,11 @@
  */
 package formation.graph;
 
+import formation.DAO.LocalDAO;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import myconnections.DBConnection;
+
 /**
  *
  * @author BARCA
@@ -16,6 +21,17 @@ public class TestCreationLocal extends javax.swing.JFrame {
      */
     public TestCreationLocal() {
         initComponents();
+        Connection dbConnect = DBConnection.getConnection();
+        /*if (dbConnect == null) {
+            System.out.println("connection invalide");
+            JOptionPane.showMessageDialog(this,"connexion invalide","ERREUR",JOptionPane.ERROR_MESSAGE);
+        }*/
+        
+       
+    LocalDAO localDAO = new LocalDAO();
+    localDAO.setConnection(dbConnect);
+    //creationLocal.setClientDAO(localDAO);
+    
     }
 
     /**
