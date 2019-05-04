@@ -47,9 +47,9 @@ public class GestionLocal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        creationLocal1 = new formation.graph.CreationLocal();
         rechLocalDescription1 = new formation.graph.RechLocalDescription();
         rechLocalSigle1 = new formation.graph.RechLocalSigle();
-        creationLocal1 = new formation.graph.CreationLocal();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuLocal = new javax.swing.JMenu();
         itemCreat = new javax.swing.JMenuItem();
@@ -58,19 +58,34 @@ public class GestionLocal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
-        getContentPane().add(rechLocalDescription1, "card3");
-        getContentPane().add(rechLocalSigle1, "card4");
-        getContentPane().add(creationLocal1, "card4");
+        getContentPane().add(creationLocal1, "cardCreation");
+        getContentPane().add(rechLocalDescription1, "cardRechDesc");
+        getContentPane().add(rechLocalSigle1, "cardRechSigle");
 
         MenuLocal.setText("Local");
 
         itemCreat.setText("créer");
+        itemCreat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCreatActionPerformed(evt);
+            }
+        });
         MenuLocal.add(itemCreat);
 
         itemRechS.setText("recherche par sigle");
+        itemRechS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRechSActionPerformed(evt);
+            }
+        });
         MenuLocal.add(itemRechS);
 
         itemRechDesc.setText("recherche par description");
+        itemRechDesc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRechDescActionPerformed(evt);
+            }
+        });
         MenuLocal.add(itemRechDesc);
 
         jMenuBar1.add(MenuLocal);
@@ -79,6 +94,21 @@ public class GestionLocal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void itemCreatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCreatActionPerformed
+        // TODO add your handling code here:
+        cardl.show(this.getContentPane(), "cardCreation");
+    }//GEN-LAST:event_itemCreatActionPerformed
+
+    private void itemRechSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechSActionPerformed
+        // TODO add your handling code here:
+        cardl.show(this.getContentPane(), "cardRechSigle");
+    }//GEN-LAST:event_itemRechSActionPerformed
+
+    private void itemRechDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechDescActionPerformed
+        // TODO add your handling code here:
+        cardl.show(this.getContentPane(), "cardRechDesc");
+    }//GEN-LAST:event_itemRechDescActionPerformed
 
     /**
      * @param args the command line arguments
