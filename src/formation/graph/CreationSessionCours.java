@@ -6,6 +6,11 @@
 package formation.graph;
 
 import formation.DAO.SessionCoursDAO;
+import formation.metier.SessionCours;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +29,7 @@ public class CreationSessionCours extends javax.swing.JPanel {
       public void setSessionCoursDAO(SessionCoursDAO sessionCoursDAO){
         this.sessionCoursDAO=sessionCoursDAO;
     }
+       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,38 +41,149 @@ public class CreationSessionCours extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtIdsessionCours = new javax.swing.JTextField();
+        txtNbrInscrits = new javax.swing.JTextField();
+        txtIdlocal = new javax.swing.JTextField();
+        txtIdcours = new javax.swing.JTextField();
+        btCreation = new javax.swing.JButton();
+        txtDateDebut = new javax.swing.JFormattedTextField();
+        txtDateFin = new javax.swing.JFormattedTextField();
 
         setBackground(new java.awt.Color(0, 204, 204));
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("idssesscours");
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("date de debut");
+
+        jLabel3.setText("date de fin");
+
+        jLabel4.setText("nombre inscrits");
+
+        jLabel5.setText("idlocal");
+
+        jLabel6.setText("idcours");
+
+        txtIdsessionCours.setText("jTextField1");
+
+        txtNbrInscrits.setText("jTextField4");
+
+        txtIdlocal.setText("jTextField5");
+
+        txtIdcours.setText("jTextField6");
+
+        btCreation.setText("Création");
+        btCreation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCreationActionPerformed(evt);
+            }
+        });
+
+        txtDateDebut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
+        txtDateFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addContainerGap(439, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(127, 127, 127)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtIdsessionCours)
+                            .addComponent(txtNbrInscrits)
+                            .addComponent(txtIdlocal)
+                            .addComponent(txtIdcours)
+                            .addComponent(txtDateDebut)
+                            .addComponent(txtDateFin)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(btCreation)))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(jLabel1)
-                .addGap(46, 46, 46)
-                .addComponent(jLabel2)
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addGap(77, 77, 77)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtIdsessionCours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNbrInscrits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtIdlocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtIdcours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(btCreation)
+                .addGap(23, 23, 23))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btCreationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCreationActionPerformed
+        // TODO add your handling code here:
+        try{       
+            //String datedebut=txtDateDebut.getText();
+            //String datefin=txtDateFin.getText();
+             Date datedebut=new Date();
+             Date datefin =new Date();
+             datedebut=formatter.parse(txtDateDebut.getText());
+             datefin = formatter.parse(txtDateFin.getText());
+            int nbreinscrits=Integer.parseInt(txtNbrInscrits.getText());
+            int idlocal=Integer.parseInt(txtIdlocal.getText());
+            int idcours=Integer.parseInt(txtIdcours.getText());
+            SessionCours s = new SessionCours(0,datedebut,datefin,nbreinscrits,idlocal,idcours);
+            s=sessionCoursDAO.create(s);
+            txtIdsessionCours.setText(""+s.getIdsesscours());
+            JOptionPane.showMessageDialog(this,"session cours créé","succès",JOptionPane.INFORMATION_MESSAGE);
+            
+         }
+     catch(Exception e){
+        JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+     }
+    }//GEN-LAST:event_btCreationActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCreation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JFormattedTextField txtDateDebut;
+    private javax.swing.JFormattedTextField txtDateFin;
+    private javax.swing.JTextField txtIdcours;
+    private javax.swing.JTextField txtIdlocal;
+    private javax.swing.JTextField txtIdsessionCours;
+    private javax.swing.JTextField txtNbrInscrits;
     // End of variables declaration//GEN-END:variables
 }
