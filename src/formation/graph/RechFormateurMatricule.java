@@ -5,18 +5,31 @@
  */
 package formation.graph;
 
+import formation.DAO.FormateurDAO;
+import formation.metier.Formateur;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author BARCA
  */
+
 public class RechFormateurMatricule extends javax.swing.JPanel {
 
     /**
      * Creates new form RechFormateurMatricule
      */
+    FormateurDAO formateurDAO=null;
+    Formateur f=null;
     public RechFormateurMatricule() {
         initComponents();
     }
+   
+   
+    public void setFormateurDAO(FormateurDAO formateurDAO){
+        this.formateurDAO=formateurDAO;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,19 +40,242 @@ public class RechFormateurMatricule extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbMatricule = new javax.swing.JLabel();
+        lb = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtMatricule = new javax.swing.JTextField();
+        txtIdform = new javax.swing.JTextField();
+        txtNom = new javax.swing.JTextField();
+        txtPrenom = new javax.swing.JTextField();
+        txtNumero = new javax.swing.JTextField();
+        txtRue = new javax.swing.JTextField();
+        txtLocalite = new javax.swing.JTextField();
+        txtCp = new javax.swing.JTextField();
+        txtTel = new javax.swing.JTextField();
+        btRechercher = new javax.swing.JButton();
+        btMaj = new javax.swing.JButton();
+        btEffacer = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(153, 153, 255));
+
+        lbMatricule.setText("Matricule");
+
+        lb.setText("idform");
+
+        jLabel3.setText("nom");
+
+        jLabel4.setText("prenom");
+
+        jLabel5.setText("numero");
+
+        jLabel6.setText("rue");
+
+        jLabel7.setText("localite");
+
+        jLabel8.setText("cp");
+
+        jLabel9.setText("tel");
+
+        btRechercher.setText("Rechercher");
+        btRechercher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRechercherActionPerformed(evt);
+            }
+        });
+
+        btMaj.setText("maj");
+        btMaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMajActionPerformed(evt);
+            }
+        });
+
+        btEffacer.setText("effacer");
+        btEffacer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEffacerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbMatricule)
+                                .addComponent(lb)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(39, 39, 39)))
+                        .addGap(170, 170, 170)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMatricule, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(txtIdform)
+                            .addComponent(txtNom)
+                            .addComponent(txtPrenom)
+                            .addComponent(txtNumero)
+                            .addComponent(txtRue)
+                            .addComponent(txtLocalite)
+                            .addComponent(txtCp)
+                            .addComponent(txtTel))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btRechercher)
+                        .addGap(86, 86, 86)
+                        .addComponent(btMaj, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addComponent(btEffacer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbMatricule)
+                    .addComponent(txtMatricule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb)
+                    .addComponent(txtIdform, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtRue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtLocalite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtCp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btRechercher)
+                    .addComponent(btMaj)
+                    .addComponent(btEffacer))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRechercherActionPerformed
+        // TODO add your handling code here:
+        try{
+             String matricule= txtMatricule.getText();
+             f=formateurDAO.readMatricule(matricule);
+             txtIdform.setText(""+f.getIdform());
+             txtNom.setText(f.getNom());
+             txtPrenom.setText(f.getPrenom());
+             txtNumero.setText(f.getNumero());
+             txtRue.setText(f.getRue());
+             txtLocalite.setText(f.getLocalite());
+             txtCp.setText(""+f.getCp());
+             txtTel.setText(f.getTel());
+             JOptionPane.showMessageDialog(this,"formateur trouvé","succès",JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_btRechercherActionPerformed
+    }
+    private void btMajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMajActionPerformed
+        // TODO add your handling code here:
+          try{  
+       String matricule=txtMatricule.getText();
+       int idform=Integer.parseInt(txtIdform.getText());
+       String nom=txtNom.getText();
+       String prenom=txtPrenom.getText();
+       String numero=txtNumero.getText();
+       String rue=txtRue.getText();
+       String localite=txtLocalite.getText();
+       int cp=Integer.parseInt(txtCp.getText());
+       String tel=txtTel.getText();
+       Formateur f = new Formateur(idform,matricule,nom,prenom,numero,rue,localite,cp,tel);
+       formateurDAO.update(f);
+       JOptionPane.showMessageDialog(this,"formateur mis à jour","succès",JOptionPane.INFORMATION_MESSAGE);
+       
+     }
+     catch(Exception e){
+        JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+     }
+    }//GEN-LAST:event_btMajActionPerformed
+
+    private void btEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEffacerActionPerformed
+        // TODO add your handling code here:
+        try{
+             String matricule=txtMatricule.getText();
+             formateurDAO.delete(f);
+             txtIdform.setText(""+f.getIdform());
+             txtNom.setText(f.getNom());
+             txtPrenom.setText(f.getPrenom());
+             txtNumero.setText(f.getNumero());
+             txtRue.setText(f.getRue());
+             txtLocalite.setText(f.getLocalite());
+             txtCp.setText(""+f.getCp());
+             txtTel.setText(f.getTel());
+             
+             JOptionPane.showMessageDialog(this,"formateur effacé","succès",JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+     }
+    }//GEN-LAST:event_btEffacerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btEffacer;
+    private javax.swing.JButton btMaj;
+    private javax.swing.JButton btRechercher;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lb;
+    private javax.swing.JLabel lbMatricule;
+    private javax.swing.JTextField txtCp;
+    private javax.swing.JTextField txtIdform;
+    private javax.swing.JTextField txtLocalite;
+    private javax.swing.JTextField txtMatricule;
+    private javax.swing.JTextField txtNom;
+    private javax.swing.JTextField txtNumero;
+    private javax.swing.JTextField txtPrenom;
+    private javax.swing.JTextField txtRue;
+    private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 }

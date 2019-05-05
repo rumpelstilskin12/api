@@ -48,6 +48,7 @@ public class Gestion extends javax.swing.JFrame {
     FormateurDAO formateurDAO = new FormateurDAO();
     formateurDAO.setConnection(dbConnect);
     creationFormateur1.setFormateurDAO(formateurDAO);
+    rechFormateurMatricule1.setFormateurDAO(formateurDAO);
     rechFormateurNom1.setFormateurDAO(formateurDAO);
     
     }
@@ -69,6 +70,7 @@ public class Gestion extends javax.swing.JFrame {
         rechCoursIdcours1 = new formation.graph.RechCoursIdcours();
         rechCoursMatiere1 = new formation.graph.RechCoursMatiere();
         rechFormateurNom1 = new formation.graph.RechFormateurNom();
+        rechFormateurMatricule1 = new formation.graph.RechFormateurMatricule();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuLocal = new javax.swing.JMenu();
         itemCreat = new javax.swing.JMenuItem();
@@ -95,6 +97,9 @@ public class Gestion extends javax.swing.JFrame {
         getContentPane().add(rechCoursIdcours1, "cardRechCoursIdcours");
         getContentPane().add(rechCoursMatiere1, "cardRechCoursMatiere");
         getContentPane().add(rechFormateurNom1, "cardRechFormNom");
+
+        rechFormateurMatricule1.setBackground(new java.awt.Color(153, 153, 255));
+        getContentPane().add(rechFormateurMatricule1, "cardRechFormMatricule");
 
         MenuLocal.setText("Local");
 
@@ -218,6 +223,7 @@ public class Gestion extends javax.swing.JFrame {
 
     private void itemRechMatriculeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechMatriculeActionPerformed
         // TODO add your handling code here:
+           cardl.show(this.getContentPane(), "cardRechFormMatricule");
     }//GEN-LAST:event_itemRechMatriculeActionPerformed
 
     private void itemRechNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechNomActionPerformed
@@ -292,6 +298,7 @@ public class Gestion extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private formation.graph.RechCoursIdcours rechCoursIdcours1;
     private formation.graph.RechCoursMatiere rechCoursMatiere1;
+    private formation.graph.RechFormateurMatricule rechFormateurMatricule1;
     private formation.graph.RechFormateurNom rechFormateurNom1;
     private formation.graph.RechLocalDescription rechLocalDescription1;
     private formation.graph.RechLocalSigle rechLocalSigle1;
