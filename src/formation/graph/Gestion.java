@@ -42,10 +42,13 @@ public class Gestion extends javax.swing.JFrame {
     CoursDAO coursDAO = new CoursDAO();
     coursDAO.setConnection(dbConnect);
     creationCours1.setCoursDAO(coursDAO);
+    rechCoursIdcours1.setCoursDAO(coursDAO);
+    rechCoursMatiere1.setCoursDAO(coursDAO);
     
     FormateurDAO formateurDAO = new FormateurDAO();
     formateurDAO.setConnection(dbConnect);
     creationFormateur1.setFormateurDAO(formateurDAO);
+    rechFormateurNom1.setFormateurDAO(formateurDAO);
     
     }
 
@@ -63,6 +66,9 @@ public class Gestion extends javax.swing.JFrame {
         rechLocalSigle1 = new formation.graph.RechLocalSigle();
         creationCours1 = new formation.graph.CreationCours();
         creationFormateur1 = new formation.graph.CreationFormateur();
+        rechCoursIdcours1 = new formation.graph.RechCoursIdcours();
+        rechCoursMatiere1 = new formation.graph.RechCoursMatiere();
+        rechFormateurNom1 = new formation.graph.RechFormateurNom();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuLocal = new javax.swing.JMenu();
         itemCreat = new javax.swing.JMenuItem();
@@ -86,6 +92,9 @@ public class Gestion extends javax.swing.JFrame {
         getContentPane().add(rechLocalSigle1, "cardRechSigle");
         getContentPane().add(creationCours1, "cardCreationCours");
         getContentPane().add(creationFormateur1, "cardCreationFormateur");
+        getContentPane().add(rechCoursIdcours1, "cardRechCoursIdcours");
+        getContentPane().add(rechCoursMatiere1, "cardRechCoursMatiere");
+        getContentPane().add(rechFormateurNom1, "cardRechFormNom");
 
         MenuLocal.setText("Local");
 
@@ -126,9 +135,19 @@ public class Gestion extends javax.swing.JFrame {
         MenuCours.add(itemCreatC);
 
         itemRechIdcours.setText("recherche par idcours");
+        itemRechIdcours.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRechIdcoursActionPerformed(evt);
+            }
+        });
         MenuCours.add(itemRechIdcours);
 
         itemRechMat.setText("recherche par matiere");
+        itemRechMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRechMatActionPerformed(evt);
+            }
+        });
         MenuCours.add(itemRechMat);
 
         jMenuBar1.add(MenuCours);
@@ -203,7 +222,18 @@ public class Gestion extends javax.swing.JFrame {
 
     private void itemRechNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechNomActionPerformed
         // TODO add your handling code here:
+        cardl.show(this.getContentPane(), "cardRechFormNom");
     }//GEN-LAST:event_itemRechNomActionPerformed
+
+    private void itemRechIdcoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechIdcoursActionPerformed
+        // TODO add your handling code here:
+        cardl.show(this.getContentPane(), "cardRechCoursIdcours");
+    }//GEN-LAST:event_itemRechIdcoursActionPerformed
+
+    private void itemRechMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechMatActionPerformed
+        // TODO add your handling code here:
+         cardl.show(this.getContentPane(), "cardRechCoursMatiere");
+    }//GEN-LAST:event_itemRechMatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,6 +290,9 @@ public class Gestion extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemRechNom;
     private javax.swing.JMenuItem itemRechS;
     private javax.swing.JMenuBar jMenuBar1;
+    private formation.graph.RechCoursIdcours rechCoursIdcours1;
+    private formation.graph.RechCoursMatiere rechCoursMatiere1;
+    private formation.graph.RechFormateurNom rechFormateurNom1;
     private formation.graph.RechLocalDescription rechLocalDescription1;
     private formation.graph.RechLocalSigle rechLocalSigle1;
     // End of variables declaration//GEN-END:variables

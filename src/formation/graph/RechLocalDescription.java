@@ -27,7 +27,6 @@ public class RechLocalDescription extends javax.swing.JPanel {
     DefaultTableModel dft1 = new DefaultTableModel();
     public RechLocalDescription() {
         initComponents();
-        initComponents();
         dft1.addColumn("idlocal");
         dft1.addColumn("sigle");
         dft1.addColumn("places");

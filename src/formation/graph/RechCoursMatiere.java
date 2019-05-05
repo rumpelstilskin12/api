@@ -5,6 +5,14 @@
  */
 package formation.graph;
 
+import formation.DAO.CoursDAO;
+import formation.metier.Cours;
+import formation.metier.Local;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author BARCA
@@ -14,10 +22,20 @@ public class RechCoursMatiere extends javax.swing.JPanel {
     /**
      * Creates new form RechCoursMatiere
      */
+    CoursDAO coursDAO=null;
+    Cours c=null;
+    
+    DefaultTableModel dft1 = new DefaultTableModel();
     public RechCoursMatiere() {
         initComponents();
+        dft1.addColumn("idcours");
+        dft1.addColumn("matiere");
+        dft1.addColumn("heures");
+        jTable1.setModel(dft1);
     }
-
+     public void setCoursDAO(CoursDAO coursDAO){
+        this.coursDAO=coursDAO;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,19 +45,99 @@ public class RechCoursMatiere extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        labelMatiere = new javax.swing.JLabel();
+        txtMatiere = new javax.swing.JTextField();
+        btRechercher = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        setBackground(new java.awt.Color(153, 153, 153));
+
+        labelMatiere.setText("matiere");
+
+        btRechercher.setBackground(new java.awt.Color(153, 153, 153));
+        btRechercher.setText("Rechercher");
+        btRechercher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRechercherActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "idcours", "matiere", "heures"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(labelMatiere)
+                .addGap(69, 69, 69)
+                .addComponent(txtMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(btRechercher))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMatiere)
+                    .addComponent(txtMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btRechercher)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btRechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRechercherActionPerformed
+        // TODO add your handling code here:
+          try{ 
+        String matiere =txtMatiere.getText();
+        List<Cours> alc= coursDAO.rechCoursMat(matiere);
+        int nr = dft1.getRowCount();
+        for(int i=nr-1;i>=0;i--)dft1.removeRow(i);
+        for(Cours m:alc){
+            Vector v = new Vector();
+            v.add(m.getIdcours());
+            v.add(m.getMatiere());
+            v.add(m.getHeures());
+            dft1.addRow(v);
+           
+        }
+       }
+       catch(Exception e){
+           JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_btRechercherActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btRechercher;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel labelMatiere;
+    private javax.swing.JTextField txtMatiere;
     // End of variables declaration//GEN-END:variables
 }
