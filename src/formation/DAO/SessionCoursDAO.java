@@ -42,7 +42,7 @@ public class SessionCoursDAO extends DAO <SessionCours> {
             pstm1.setDate(2, java.sql.Date.valueOf(obj.getDatefin()));
             pstm1.setInt(3, obj.getNbreinscrits());
             pstm1.setInt(4, obj.getIdlocal());
-            pstm1.setInt(5, obj.getCours().getIdcours());
+            pstm1.setInt(5, obj.getIdcours());
 
             int n = pstm1.executeUpdate();
             if (n == 0) {
@@ -53,7 +53,7 @@ public class SessionCoursDAO extends DAO <SessionCours> {
             pstm2.setDate(2, java.sql.Date.valueOf(obj.getDatefin()));
             pstm2.setInt(3, obj.getNbreinscrits());
             pstm2.setInt(4, obj.getIdlocal());
-            pstm2.setInt(5, obj.getCours().getIdcours());
+            pstm2.setInt(5, obj.getIdcours());
 
             try (ResultSet rs = pstm2.executeQuery()) {
                 if (rs.next()) {
@@ -105,7 +105,7 @@ public class SessionCoursDAO extends DAO <SessionCours> {
             pstm.setDate(2, java.sql.Date.valueOf(obj.getDatefin()));
             pstm.setInt(3, obj.getNbreinscrits());
             pstm.setInt(4, obj.getIdlocal());
-            pstm.setInt(5, obj.getCours().getIdcours());
+            pstm.setInt(5, obj.getIdcours());
             
             
 

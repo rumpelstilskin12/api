@@ -15,7 +15,7 @@ public class Cours {
     protected int idcours;
     protected String matiere;
     protected int heures;
-    private Set <SessionCours> sessioncours=new HashSet<>();
+   // private Set <SessionCours> sessioncours=new HashSet<>();
     public Cours() {
     }
 

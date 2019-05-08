@@ -7,10 +7,9 @@ package formation.graph;
 
 import formation.DAO.SessionCoursDAO;
 import formation.metier.SessionCours;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import javax.swing.JFormattedTextField;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -50,8 +49,8 @@ public class CreationSessionCours extends javax.swing.JPanel {
         txtIdlocal = new javax.swing.JTextField();
         txtIdcours = new javax.swing.JTextField();
         btCreation = new javax.swing.JButton();
-        txtDateDebut = new javax.swing.JFormattedTextField();
-        txtDateFin = new javax.swing.JFormattedTextField();
+        txtDateDebut = new com.toedter.calendar.JDateChooser();
+        txtDateFin = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(0, 204, 204));
 
@@ -67,14 +66,6 @@ public class CreationSessionCours extends javax.swing.JPanel {
 
         jLabel6.setText("idcours");
 
-        txtIdsessionCours.setText("jTextField1");
-
-        txtNbrInscrits.setText("jTextField4");
-
-        txtIdlocal.setText("jTextField5");
-
-        txtIdcours.setText("jTextField6");
-
         btCreation.setText("Création");
         btCreation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,14 +73,18 @@ public class CreationSessionCours extends javax.swing.JPanel {
             }
         });
 
-        txtDateDebut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        txtDateDebut.setDateFormatString("dd-MM-yyyy");
 
-        txtDateFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        txtDateFin.setDateFormatString("dd-MM-yyyy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtIdlocal, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(184, 184, 184))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -101,18 +96,23 @@ public class CreationSessionCours extends javax.swing.JPanel {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(127, 127, 127)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtIdsessionCours)
-                            .addComponent(txtNbrInscrits)
-                            .addComponent(txtIdlocal)
-                            .addComponent(txtIdcours)
-                            .addComponent(txtDateDebut)
-                            .addComponent(txtDateFin)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(127, 127, 127)
+                                .addComponent(txtIdsessionCours, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(119, 119, 119)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNbrInscrits, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDateFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtDateDebut, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(111, 111, 111)
+                                .addComponent(txtIdcours, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
+                        .addGap(148, 148, 148)
                         .addComponent(btCreation)))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,45 +121,54 @@ public class CreationSessionCours extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtIdsessionCours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(txtDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(txtDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                    .addComponent(txtDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNbrInscrits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtIdlocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                    .addComponent(txtIdlocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtIdcours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGap(45, 45, 45)
                 .addComponent(btCreation)
-                .addGap(23, 23, 23))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCreationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCreationActionPerformed
         // TODO add your handling code here:
         try{       
-            //String datedebut=txtDateDebut.getText();
-            //String datefin=txtDateFin.getText();
-             Date datedebut=new Date();
-             Date datefin =new Date();
-             datedebut=formatter.parse(txtDateDebut.getText());
-             datefin = formatter.parse(txtDateFin.getText());
+            
+            String datedebut=((JTextField)txtDateDebut.getDateEditor().getUiComponent()).getText();
+            int jourd=Integer.parseInt(datedebut.substring(0,2));
+            int moisd=Integer.parseInt(datedebut.substring(4,5));
+            int anneed=Integer.parseInt(datedebut.substring(7,10));
+         
+             LocalDate datedebut2=LocalDate.of(anneed, moisd,jourd);
+           
+        String datefin=((JTextField)txtDateFin.getDateEditor().getUiComponent()).getText();
+         int jourf=Integer.parseInt(datefin.substring(0,2)); //substring permet de délimiter les nombres que l'on prend de la chaine de caract
+         int moisf=Integer.parseInt(datefin.substring(4,5));
+         int anneef=Integer.parseInt(datefin.substring(7,10));
+         
+        LocalDate datefin2=LocalDate.of(anneef, moisf,jourf);
+        
             int nbreinscrits=Integer.parseInt(txtNbrInscrits.getText());
             int idlocal=Integer.parseInt(txtIdlocal.getText());
             int idcours=Integer.parseInt(txtIdcours.getText());
-            SessionCours s = new SessionCours(0,datedebut,datefin,nbreinscrits,idlocal,idcours);
+            SessionCours s = new SessionCours(0,datedebut2,datefin2,nbreinscrits,idlocal,idcours);
             s=sessionCoursDAO.create(s);
             txtIdsessionCours.setText(""+s.getIdsesscours());
             JOptionPane.showMessageDialog(this,"session cours créé","succès",JOptionPane.INFORMATION_MESSAGE);
@@ -179,8 +188,8 @@ public class CreationSessionCours extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JFormattedTextField txtDateDebut;
-    private javax.swing.JFormattedTextField txtDateFin;
+    private com.toedter.calendar.JDateChooser txtDateDebut;
+    private com.toedter.calendar.JDateChooser txtDateFin;
     private javax.swing.JTextField txtIdcours;
     private javax.swing.JTextField txtIdlocal;
     private javax.swing.JTextField txtIdsessionCours;

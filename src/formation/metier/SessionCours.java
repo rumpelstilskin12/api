@@ -19,8 +19,8 @@ public class SessionCours {
     protected LocalDate datefin;
     protected int nbreinscrits;
     protected int idlocal;
-    //protected int idcours;
-    protected Cours cours =new Cours();
+    protected int idcours;
+    //protected Cours cours =new Cours();
     
 
     public SessionCours(int idsesscours, LocalDate datedebut, LocalDate datefin, int nbreinscrits, int idlocal, int idcours) {
@@ -29,7 +29,7 @@ public class SessionCours {
         this.datefin = datefin;
         this.nbreinscrits = nbreinscrits;
         this.idlocal = idlocal;
-        this.cours.idcours = idcours;
+        this.idcours = idcours;
     }
 
     public int getIdsesscours() {
@@ -72,19 +72,28 @@ public class SessionCours {
         this.idlocal = idlocal;
     }
 
-    public Cours getCours() {
+    /*public Cours getCours() {
         return cours;
+    }*/
+
+    /*public void setCours(Cours cours) {
+        this.cours = cours;
+    }*/
+
+    public int getIdcours() {
+        return idcours;
     }
 
-    public void setCours(Cours cours) {
-        this.cours = cours;
+    public void setIdcours(int idcours) {
+        this.idcours = idcours;
     }
 
     @Override
     public String toString() {
-        return "SessionCours{" + "idsesscours=" + idsesscours + ", datedebut=" + datedebut + ", datefin=" + datefin + ", nbreinscrits=" + nbreinscrits + ", idlocal=" + idlocal + ", cours=" + cours + '}';
+        return "SessionCours{" + "idsesscours=" + idsesscours + ", datedebut=" + datedebut + ", datefin=" + datefin + ", nbreinscrits=" + nbreinscrits + ", idlocal=" + idlocal + ", idcours=" + idcours + '}';
     }
 
+    
    
     
 
