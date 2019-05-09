@@ -186,13 +186,6 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="formation.graph.RechCoursIdcours" name="rechCoursIdcours1">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-          <CardConstraints cardName="cardRechCoursIdcours"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="formation.graph.RechCoursMatiere" name="rechCoursMatiere1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -225,6 +218,13 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
           <CardConstraints cardName="cardSessionCours"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="formation.graph.RechCoursIdcours" name="rechCoursIdcours1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="cardRechCoursIdcours"/>
         </Constraint>
       </Constraints>
     </Component>

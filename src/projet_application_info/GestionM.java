@@ -188,9 +188,10 @@ public class GestionM {
                     System.out.println("Menu secondaire :");
                     System.out.println("\t1.Modifier");
                     System.out.println("\t2.Supprimer");
-                    System.out.println("\t3.Revenir au menu cours");
+                    System.out.println("\t3.afficher SessionCours");
+                    System.out.println("\t4.Revenir au menu cours");
                     option = sc.nextLine();
-                } while (verifier_chaine(option, "[1-3]") == false);
+                } while (verifier_chaine(option, "[1-4]") == false);
                 choix = Integer.parseInt(option);
                 switch (choix) {
                     case 1:
@@ -200,6 +201,8 @@ public class GestionM {
                         supprimerCours();
                         break;
                     case 3:
+                        afficherSessionCours();
+                    case 4:
                         menuCours();
                         break;
                 }
@@ -265,7 +268,7 @@ public class GestionM {
 
     }
     //methode de suppression d'un cours
-
+    
     public void supprimerCours() {
         try {
             CoursDAO.delete(coursActuel);
@@ -273,7 +276,18 @@ public class GestionM {
             System.out.println("erreur " + e.getMessage());
         }
     }
-
+    public void afficherSessionCours(){
+        try{
+          
+            List<SessionCours> sess = ((SessionCoursDAO) SessionCoursDAO).rechSessionCours(coursActuel.getIdcours());
+            for (SessionCours c : sess) {
+                System.out.println(c);
+            }
+            
+        } catch(SQLException e){
+            System.out.println("erreur"+e.getMessage());
+        }
+    }
     //=================================================================   GESTION LOCAL  =====================================================================      
     //Menu d'un local    
     public void menuLocal() {

@@ -82,6 +82,8 @@ public class RechFormateurMatricule extends javax.swing.JPanel {
 
         jLabel9.setText("tel");
 
+        txtIdform.setEditable(false);
+
         btRechercher.setText("Rechercher");
         btRechercher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

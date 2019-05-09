@@ -6,8 +6,13 @@
 package formation.graph;
 
 import formation.DAO.CoursDAO;
+import formation.DAO.SessionCoursDAO;
 import formation.metier.Cours;
+import formation.metier.SessionCours;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,14 +25,24 @@ public class RechCoursIdcours extends javax.swing.JPanel {
      */
     CoursDAO coursDAO=null;
     Cours c=null;
+    SessionCoursDAO sessionCoursDAO=null;
+     DefaultTableModel dft1 = new DefaultTableModel();
     public RechCoursIdcours() {
         initComponents();
+        dft1.addColumn("idsesscours");
+        dft1.addColumn("date debut");
+        dft1.addColumn("date fin");
+        dft1.addColumn("nombres d'inscrits");
+        dft1.addColumn("idlocal");
+        jTable1.setModel(dft1);
     }
      
     public void setCoursDAO(CoursDAO coursDAO){
         this.coursDAO=coursDAO;
     }
-    
+    public void setSessionCoursDAO(SessionCoursDAO sessionCoursDAO){
+        this.sessionCoursDAO=sessionCoursDAO;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +61,8 @@ public class RechCoursIdcours extends javax.swing.JPanel {
         btRecherche = new javax.swing.JButton();
         btMaj = new javax.swing.JButton();
         btSupprimer = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(153, 153, 153));
 
@@ -77,6 +94,19 @@ public class RechCoursIdcours extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Idsesscours", "date debut", "date fin", "nombre d'inscrits", "idlocal"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,24 +114,28 @@ public class RechCoursIdcours extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelIdcours)
-                    .addComponent(labelMatiere)
-                    .addComponent(labelHeures)
-                    .addComponent(btRecherche))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMatiere, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                            .addComponent(txtIdcours)
-                            .addComponent(txtHeures))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(24, 24, 24)
+                        .addComponent(btRecherche)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btMaj, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addGap(87, 87, 87)
                         .addComponent(btSupprimer)
-                        .addGap(57, 57, 57))))
+                        .addGap(97, 97, 97))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelIdcours)
+                                    .addComponent(labelMatiere)
+                                    .addComponent(labelHeures))
+                                .addGap(98, 98, 98)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtMatiere, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                    .addComponent(txtIdcours)
+                                    .addComponent(txtHeures)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(30, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,12 +152,14 @@ public class RechCoursIdcours extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelHeures)
                     .addComponent(txtHeures, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(76, 76, 76)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btRecherche)
+                    .addComponent(btSupprimer)
                     .addComponent(btMaj)
-                    .addComponent(btSupprimer))
-                .addContainerGap(155, Short.MAX_VALUE))
+                    .addComponent(btRecherche))
+                .addGap(66, 66, 66))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,6 +171,21 @@ public class RechCoursIdcours extends javax.swing.JPanel {
              txtMatiere.setText(c.getMatiere());
              txtHeures.setText(""+c.getHeures());
              JOptionPane.showMessageDialog(this,"cours trouvé","succès",JOptionPane.INFORMATION_MESSAGE);
+             
+               String matiere =txtMatiere.getText();
+                List<SessionCours> alc= sessionCoursDAO.rechSessionCours(idcours);
+                int nr = dft1.getRowCount();
+                for(int i=nr-1;i>=0;i--)dft1.removeRow(i);
+                for(SessionCours m:alc){
+                    Vector v = new Vector();
+                    v.add(m.getIdsesscours());
+                    v.add(m.getDatedebut());
+                    v.add(m.getDatefin());
+                    v.add(m.getNbreinscrits());
+                    v.add(m.getIdlocal());
+                    dft1.addRow(v);
+
+                    }
         }
         catch(Exception e){
         JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
@@ -177,6 +228,8 @@ public class RechCoursIdcours extends javax.swing.JPanel {
     private javax.swing.JButton btMaj;
     private javax.swing.JButton btRecherche;
     private javax.swing.JButton btSupprimer;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelHeures;
     private javax.swing.JLabel labelIdcours;
     private javax.swing.JLabel labelMatiere;

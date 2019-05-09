@@ -66,6 +66,8 @@ public class CreationSessionCours extends javax.swing.JPanel {
 
         jLabel6.setText("idcours");
 
+        txtIdsessionCours.setEditable(false);
+
         btCreation.setText("Création");
         btCreation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

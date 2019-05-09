@@ -24,27 +24,33 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="labelIdcours" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="labelMatiere" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="labelHeures" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btRecherche" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtMatiere" alignment="0" pref="115" max="32767" attributes="0"/>
-                          <Component id="txtIdcours" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtHeures" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="btRecherche" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="btMaj" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="btSupprimer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelIdcours" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelMatiere" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelHeures" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtMatiere" alignment="0" pref="115" max="32767" attributes="0"/>
+                                  <Component id="txtIdcours" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtHeures" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jScrollPane1" alignment="0" min="-2" pref="573" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="30" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -68,13 +74,15 @@
                   <Component id="labelHeures" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtHeures" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="235" max="-2" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btRecherche" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btMaj" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btSupprimer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btMaj" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btRecherche" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="155" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -128,5 +136,24 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSupprimerActionPerformed"/>
       </Events>
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="jTable1">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="5" rowCount="4">
+                <Column editable="true" title="Idsesscours" type="java.lang.Object"/>
+                <Column editable="true" title="date debut" type="java.lang.Object"/>
+                <Column editable="true" title="date fin" type="java.lang.Object"/>
+                <Column editable="true" title="nombre d&apos;inscrits" type="java.lang.Object"/>
+                <Column editable="true" title="idlocal" type="java.lang.Object"/>
+              </Table>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

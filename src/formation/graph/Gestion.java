@@ -55,6 +55,7 @@ public class Gestion extends javax.swing.JFrame {
     SessionCoursDAO sessionCoursDAO = new SessionCoursDAO();
     sessionCoursDAO.setConnection(dbConnect);
     creationSessionCours1.setSessionCoursDAO(sessionCoursDAO);
+    rechCoursIdcours1.setSessionCoursDAO(sessionCoursDAO);
     
     }
 
@@ -72,12 +73,12 @@ public class Gestion extends javax.swing.JFrame {
         rechLocalSigle1 = new formation.graph.RechLocalSigle();
         creationCours1 = new formation.graph.CreationCours();
         creationFormateur1 = new formation.graph.CreationFormateur();
-        rechCoursIdcours1 = new formation.graph.RechCoursIdcours();
         rechCoursMatiere1 = new formation.graph.RechCoursMatiere();
         rechFormateurNom1 = new formation.graph.RechFormateurNom();
         rechFormateurMatricule1 = new formation.graph.RechFormateurMatricule();
         creationLocal1 = new formation.graph.CreationLocal();
         creationSessionCours1 = new formation.graph.CreationSessionCours();
+        rechCoursIdcours1 = new formation.graph.RechCoursIdcours();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuHome = new javax.swing.JMenu();
         MenuCours = new javax.swing.JMenu();
@@ -103,12 +104,12 @@ public class Gestion extends javax.swing.JFrame {
         getContentPane().add(rechLocalSigle1, "cardRechSigle");
         getContentPane().add(creationCours1, "cardCreationCours");
         getContentPane().add(creationFormateur1, "cardCreationFormateur");
-        getContentPane().add(rechCoursIdcours1, "cardRechCoursIdcours");
         getContentPane().add(rechCoursMatiere1, "cardRechCoursMatiere");
         getContentPane().add(rechFormateurNom1, "cardRechFormNom");
         getContentPane().add(rechFormateurMatricule1, "cardRechFormMatricule");
         getContentPane().add(creationLocal1, "cardCreation");
         getContentPane().add(creationSessionCours1, "cardSessionCours");
+        getContentPane().add(rechCoursIdcours1, "cardRechCoursIdcours");
 
         MenuHome.setText("Accueil");
         MenuHome.addMouseListener(new java.awt.event.MouseAdapter() {

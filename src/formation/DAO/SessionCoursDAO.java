@@ -168,4 +168,35 @@ public class SessionCoursDAO extends DAO <SessionCours> {
             }
         }
     }
+    
+    public List<SessionCours> rechSessionCours(int idcours) throws SQLException {
+        List<SessionCours> sess = new ArrayList<>();
+        String req = "select * from api_sessioncours where idcours= ?";
+        dbConnect=DBConnection.getConnection();
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+            pstm.setInt(1, idcours);
+            try (ResultSet rs = pstm.executeQuery()) {
+                boolean trouve = false;
+                while (rs.next()) {
+                    trouve = true;
+                    
+                   
+                    int idsesscours = rs.getInt("idsesscours");
+                    LocalDate datedebut = rs.getDate("DATEDEBUT").toLocalDate();
+                    LocalDate datefin = rs.getDate("DATEFIN").toLocalDate();
+                    int nbreinscrits = rs.getInt("NbreInscrits");
+                    int idlocal =rs.getInt("idlocal");
+                    sess.add(new SessionCours(idsesscours,datedebut,datefin,nbreinscrits,idlocal,idcours));
+                }
+
+                if (!trouve) {
+                    throw new SQLException("Element inconnu");
+                } else {
+                    return sess;
+                }
+            }
+        }
+    }
+    
+    
 }
