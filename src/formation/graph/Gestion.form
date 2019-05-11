@@ -125,6 +125,29 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="MenuVueAffichage">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Affichage"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="vueHeuresSession">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="HeuresSession"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vueHeuresSessionActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="vueSessionCoursFormateur">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="SessionCoursFormateur"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vueSessionCoursFormateurActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
@@ -186,13 +209,6 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="formation.graph.RechCoursMatiere" name="rechCoursMatiere1">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-          <CardConstraints cardName="cardRechCoursMatiere"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="formation.graph.RechFormateurNom" name="rechFormateurNom1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -225,6 +241,27 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
           <CardConstraints cardName="cardRechCoursIdcours"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="formation.graph.RechCoursMatiere" name="rechCoursMatiere1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="cardRechCoursMatiere"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="formation.graph.VueHeuresSessionG" name="vueHeuresSessionG1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="carHeuresSession"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="formation.graph.VueSessionCoursFormateurG" name="vueSessionCoursFormateurG1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="cardVueSessionCoursForm"/>
         </Constraint>
       </Constraints>
     </Component>

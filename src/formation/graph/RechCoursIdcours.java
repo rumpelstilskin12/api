@@ -9,6 +9,8 @@ import formation.DAO.CoursDAO;
 import formation.DAO.SessionCoursDAO;
 import formation.metier.Cours;
 import formation.metier.SessionCours;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -26,7 +28,9 @@ public class RechCoursIdcours extends javax.swing.JPanel {
     CoursDAO coursDAO=null;
     Cours c=null;
     SessionCoursDAO sessionCoursDAO=null;
+    SessionCours s=null;
      DefaultTableModel dft1 = new DefaultTableModel();
+     SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-mm-dd");
     public RechCoursIdcours() {
         initComponents();
         dft1.addColumn("idsesscours");
@@ -166,13 +170,13 @@ public class RechCoursIdcours extends javax.swing.JPanel {
     private void btRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRechercheActionPerformed
         // TODO add your handling code here:
         try{
-             int idcours= Integer.parseInt(txtIdcours.getText());
+              int idcours= Integer.parseInt(txtIdcours.getText());
              c=coursDAO.read(idcours);
              txtMatiere.setText(c.getMatiere());
              txtHeures.setText(""+c.getHeures());
              JOptionPane.showMessageDialog(this,"cours trouvé","succès",JOptionPane.INFORMATION_MESSAGE);
              
-               String matiere =txtMatiere.getText();
+               //String matiere =txtMatiere.getText();
                 List<SessionCours> alc= sessionCoursDAO.rechSessionCours(idcours);
                 int nr = dft1.getRowCount();
                 for(int i=nr-1;i>=0;i--)dft1.removeRow(i);
@@ -189,7 +193,10 @@ public class RechCoursIdcours extends javax.swing.JPanel {
         }
         catch(Exception e){
         JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
-    }                                           
+    }    
+       
+       
+            
     }//GEN-LAST:event_btRechercheActionPerformed
 
     private void btMajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMajActionPerformed
@@ -215,6 +222,8 @@ public class RechCoursIdcours extends javax.swing.JPanel {
              coursDAO.delete(c);
              txtMatiere.setText("");
              txtHeures.setText("");
+             sessionCoursDAO.delete(s);
+             
              
              JOptionPane.showMessageDialog(this,"cours effacé","succès",JOptionPane.INFORMATION_MESSAGE);
         }

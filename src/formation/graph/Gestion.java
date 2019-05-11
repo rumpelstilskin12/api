@@ -9,6 +9,8 @@ import formation.DAO.CoursDAO;
 import formation.DAO.FormateurDAO;
 import formation.DAO.LocalDAO;
 import formation.DAO.SessionCoursDAO;
+import formation.DAO.VueHeuresSessionDAO;
+import formation.DAO.VueSessionCoursFormateurDAO;
 import java.awt.CardLayout;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -57,6 +59,14 @@ public class Gestion extends javax.swing.JFrame {
     creationSessionCours1.setSessionCoursDAO(sessionCoursDAO);
     rechCoursIdcours1.setSessionCoursDAO(sessionCoursDAO);
     
+    VueHeuresSessionDAO vueHeuresSessionDAO = new VueHeuresSessionDAO();
+    vueHeuresSessionDAO.setConnection(dbConnect);
+    vueHeuresSessionG1.setVueHeuresSessionDAO(vueHeuresSessionDAO);
+    
+    VueSessionCoursFormateurDAO vueSessionCoursFormateurDAO = new VueSessionCoursFormateurDAO();
+    vueSessionCoursFormateurDAO.setConnection(dbConnect);
+    vueSessionCoursFormateurG1.setVueSessionCoursFormateurDAO(vueSessionCoursFormateurDAO);
+    
     }
 
     /**
@@ -73,12 +83,14 @@ public class Gestion extends javax.swing.JFrame {
         rechLocalSigle1 = new formation.graph.RechLocalSigle();
         creationCours1 = new formation.graph.CreationCours();
         creationFormateur1 = new formation.graph.CreationFormateur();
-        rechCoursMatiere1 = new formation.graph.RechCoursMatiere();
         rechFormateurNom1 = new formation.graph.RechFormateurNom();
         rechFormateurMatricule1 = new formation.graph.RechFormateurMatricule();
         creationLocal1 = new formation.graph.CreationLocal();
         creationSessionCours1 = new formation.graph.CreationSessionCours();
         rechCoursIdcours1 = new formation.graph.RechCoursIdcours();
+        rechCoursMatiere1 = new formation.graph.RechCoursMatiere();
+        vueHeuresSessionG1 = new formation.graph.VueHeuresSessionG();
+        vueSessionCoursFormateurG1 = new formation.graph.VueSessionCoursFormateurG();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuHome = new javax.swing.JMenu();
         MenuCours = new javax.swing.JMenu();
@@ -96,6 +108,9 @@ public class Gestion extends javax.swing.JFrame {
         itemRechDesc = new javax.swing.JMenuItem();
         MenuSessionCours = new javax.swing.JMenu();
         itemSessionCours = new javax.swing.JMenuItem();
+        MenuVueAffichage = new javax.swing.JMenu();
+        vueHeuresSession = new javax.swing.JMenuItem();
+        vueSessionCoursFormateur = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -104,12 +119,14 @@ public class Gestion extends javax.swing.JFrame {
         getContentPane().add(rechLocalSigle1, "cardRechSigle");
         getContentPane().add(creationCours1, "cardCreationCours");
         getContentPane().add(creationFormateur1, "cardCreationFormateur");
-        getContentPane().add(rechCoursMatiere1, "cardRechCoursMatiere");
         getContentPane().add(rechFormateurNom1, "cardRechFormNom");
         getContentPane().add(rechFormateurMatricule1, "cardRechFormMatricule");
         getContentPane().add(creationLocal1, "cardCreation");
         getContentPane().add(creationSessionCours1, "cardSessionCours");
         getContentPane().add(rechCoursIdcours1, "cardRechCoursIdcours");
+        getContentPane().add(rechCoursMatiere1, "cardRechCoursMatiere");
+        getContentPane().add(vueHeuresSessionG1, "carHeuresSession");
+        getContentPane().add(vueSessionCoursFormateurG1, "cardVueSessionCoursForm");
 
         MenuHome.setText("Accueil");
         MenuHome.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -218,6 +235,26 @@ public class Gestion extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuSessionCours);
 
+        MenuVueAffichage.setText("Affichage");
+
+        vueHeuresSession.setText("HeuresSession");
+        vueHeuresSession.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vueHeuresSessionActionPerformed(evt);
+            }
+        });
+        MenuVueAffichage.add(vueHeuresSession);
+
+        vueSessionCoursFormateur.setText("SessionCoursFormateur");
+        vueSessionCoursFormateur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vueSessionCoursFormateurActionPerformed(evt);
+            }
+        });
+        MenuVueAffichage.add(vueSessionCoursFormateur);
+
+        jMenuBar1.add(MenuVueAffichage);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -278,6 +315,16 @@ public class Gestion extends javax.swing.JFrame {
          cardl.show(this.getContentPane(), "cardSessionCours");
     }//GEN-LAST:event_itemSessionCoursActionPerformed
 
+    private void vueSessionCoursFormateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vueSessionCoursFormateurActionPerformed
+        // TODO add your handling code here:
+         cardl.show(this.getContentPane(),"cardVueSessionCoursForm");
+    }//GEN-LAST:event_vueSessionCoursFormateurActionPerformed
+
+    private void vueHeuresSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vueHeuresSessionActionPerformed
+        // TODO add your handling code here:
+         cardl.show(this.getContentPane(), "carHeuresSession");
+    }//GEN-LAST:event_vueHeuresSessionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -321,6 +368,7 @@ public class Gestion extends javax.swing.JFrame {
     private javax.swing.JMenu MenuInfos;
     private javax.swing.JMenu MenuLocal;
     private javax.swing.JMenu MenuSessionCours;
+    private javax.swing.JMenu MenuVueAffichage;
     private formation.graph.CreationCours creationCours1;
     private formation.graph.CreationFormateur creationFormateur1;
     private formation.graph.CreationLocal creationLocal1;
@@ -343,5 +391,9 @@ public class Gestion extends javax.swing.JFrame {
     private formation.graph.RechFormateurNom rechFormateurNom1;
     private formation.graph.RechLocalDescription rechLocalDescription1;
     private formation.graph.RechLocalSigle rechLocalSigle1;
+    private javax.swing.JMenuItem vueHeuresSession;
+    private formation.graph.VueHeuresSessionG vueHeuresSessionG1;
+    private javax.swing.JMenuItem vueSessionCoursFormateur;
+    private formation.graph.VueSessionCoursFormateurG vueSessionCoursFormateurG1;
     // End of variables declaration//GEN-END:variables
 }

@@ -156,14 +156,14 @@ public class CreationSessionCours extends javax.swing.JPanel {
             String datedebut=((JTextField)txtDateDebut.getDateEditor().getUiComponent()).getText();
             int jourd=Integer.parseInt(datedebut.substring(0,2));
             int moisd=Integer.parseInt(datedebut.substring(4,5));
-            int anneed=Integer.parseInt(datedebut.substring(7,10));
+            int anneed=Integer.parseInt(datedebut.substring(6));
          
              LocalDate datedebut2=LocalDate.of(anneed, moisd,jourd);
            
         String datefin=((JTextField)txtDateFin.getDateEditor().getUiComponent()).getText();
          int jourf=Integer.parseInt(datefin.substring(0,2)); //substring permet de délimiter les nombres que l'on prend de la chaine de caract
          int moisf=Integer.parseInt(datefin.substring(4,5));
-         int anneef=Integer.parseInt(datefin.substring(7,10));
+         int anneef=Integer.parseInt(datefin.substring(6));
          
         LocalDate datefin2=LocalDate.of(anneef, moisf,jourf);
         
