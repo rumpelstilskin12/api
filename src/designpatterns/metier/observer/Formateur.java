@@ -5,6 +5,9 @@
  */
 package designpatterns.metier.observer;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author BARCA
@@ -46,7 +49,9 @@ public class Formateur extends Observer{
      * numero de tel
      */
     protected String tel;
-
+    
+    private Set <Infos> info =new HashSet<>();
+    
     public Formateur() {
     }
 
@@ -134,6 +139,14 @@ public class Formateur extends Observer{
         this.tel = tel;
     }
 
+    public Set<Infos> getInfo() {
+        return info;
+    }
+
+    public void setInfo(Set<Infos> info) {
+        this.info = info;
+    }
+    
 
     @Override
     public String toString() {
