@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package designpatterns.metier.classes;
+package designpatterns.metier.builder;
 
 /**
  *
  * @author BARCA
  */
-public class local {
+public class Cours {
     
 }

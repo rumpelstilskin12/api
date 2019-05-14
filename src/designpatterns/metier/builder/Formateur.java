@@ -5,6 +5,9 @@
  */
 package designpatterns.metier.builder;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author BARCA
@@ -47,6 +50,7 @@ public class Formateur {
      */
     protected String tel;
 
+    //private Set <Infos> info =new HashSet<>();
  /**
  * constructeur paramétré
  * @param idform identifiant unique du formateur
@@ -60,15 +64,15 @@ public class Formateur {
  * @param tel téléphone du client
  */
     public Formateur(FormateurBuilder fb) {
-        this.idform = idform;
-        this.matricule = matricule;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.numero = numero;
-        this.rue = rue;
-        this.localite = localite;
-        this.cp = cp;
-        this.tel = tel;
+        this.idform =fb.idform;
+        this.matricule =fb.matricule;
+        this.nom =fb.nom;
+        this.prenom = fb.prenom;
+        this.numero = fb.num;
+        this.rue = fb.rue;
+        this.localite = fb.localite;
+        this.cp = fb.cp;
+        this.tel = fb.tel;
     }
     
      /**
@@ -134,6 +138,16 @@ public class Formateur {
     public String getTel() {
         return tel;
     }
+    
+    /*public Set<Infos> getInfo() {
+        return info;
+    }
+
+    /*public void setInfo(Set<Infos> info) {
+        this.info = info;
+    }
+    
+    
  /**
  * méthode toString
  * @return informations complètes
@@ -207,7 +221,7 @@ public class Formateur {
     */
 	protected String tel;
         
-        public FormateurBuilder(int idclient,String matricule,String nom,String prenom) throws Exception {
+        public FormateurBuilder(int idform,String matricule,String nom,String prenom) throws Exception {
              if(idform<=0 ||matricule==null || nom==null || prenom==null) throw new Exception("informations de construction incomplètes");
         }
 
@@ -217,8 +231,8 @@ public class Formateur {
             return this;
         }
 
-        public FormateurBuilder setLocalite(String localite) {
-            this.localite = localite;
+        public FormateurBuilder setLocalite(String localite){
+            this.localite=localite;
             return this;
         }
 
