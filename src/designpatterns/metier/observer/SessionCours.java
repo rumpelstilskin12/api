@@ -6,6 +6,8 @@
 package designpatterns.metier.observer;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -14,19 +16,21 @@ import java.time.LocalDate;
 public class SessionCours extends Subject {
     
     protected int idsesscours;
-    protected LocalDate datedebut;
-    protected LocalDate datefin;
+    protected java.util.Date datedebut;
+    protected java.util.Date datefin;
     protected int nbreinscrits;
     protected int idlocal;
     protected int idcours;
-
+    
+    Set<Local> Local=new HashSet();
+    Set<Formateur> Formateur=new HashSet();
     public SessionCours() {
     }
 
-    public SessionCours(int idsesscours, /*LocalDate datedebut, LocalDate datefin,*/ int nbreinscrits, int idlocal, int idcours) {
+    public SessionCours(int idsesscours,java.util.Date datedebut, java.util.Date datefin, int nbreinscrits, int idlocal, int idcours) {
         this.idsesscours = idsesscours;
-        //this.datedebut = datedebut;
-        //this.datefin = datefin;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
         this.nbreinscrits = nbreinscrits;
         this.idlocal = idlocal;
         this.idcours = idcours;
@@ -40,22 +44,22 @@ public class SessionCours extends Subject {
         this.idsesscours = idsesscours;
     }
 
-  /*  public LocalDate getDatedebut() {
+     public java.util.Date getDatedebut() {
         return datedebut;
     }
 
-    public void setDatedebut(LocalDate datedebut) {
+    public void setDatedebut(java.util.Date datedebut) {
         this.datedebut = datedebut;
     }
 
-    public LocalDate getDatefin() {
+    public java.util.Date getDatefin() {
         return datefin;
     }
 
-    public void setDatefin(LocalDate datefin) {
+    public void setDatefin(java.util.Date datefin) {
         this.datefin = datefin;
     }
-    */
+    
     public int getNbreinscrits() {
         return nbreinscrits;
     }

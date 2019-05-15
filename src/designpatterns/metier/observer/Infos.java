@@ -12,7 +12,7 @@ package designpatterns.metier.observer;
 public class Infos {
     protected int idinfos;
     protected int nb;
-    protected int idform;
+    private Formateur f;
     private SessionCours sessionCours;
 
     public Infos() {
@@ -22,10 +22,10 @@ public class Infos {
         this.sessionCours = sessionCours;
     }
 
-    public Infos(int idinfos, int nb, int idform, SessionCours sessionCours) {
+    public Infos(int idinfos, int nb,Formateur f, SessionCours sessionCours) {
         this.idinfos = idinfos;
         this.nb = nb;
-        this.idform = idform;
+        this.f = f;
         this.sessionCours = sessionCours;
     }
     
@@ -45,12 +45,12 @@ public class Infos {
         this.nb = nb;
     }
 
-    public int getIdform() {
-        return idform;
+    public Formateur getF() {
+        return f;
     }
 
-    public void setIdform(int idform) {
-        this.idform = idform;
+    public void setF(Formateur f) {
+        this.f = f;
     }
 
     public SessionCours getSessionCours() {
