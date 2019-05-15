@@ -32,7 +32,7 @@ public class Formateur {
     /**
      * numero de rue
      */
-    protected String numero;
+    protected String num;
     /**
      * rue
      */
@@ -68,7 +68,7 @@ public class Formateur {
         this.matricule =fb.matricule;
         this.nom =fb.nom;
         this.prenom = fb.prenom;
-        this.numero = fb.num;
+        this.num = fb.num;
         this.rue = fb.rue;
         this.localite = fb.localite;
         this.cp = fb.cp;
@@ -108,7 +108,7 @@ public class Formateur {
     * @return numero du formateur
     */
     public String getNumero() {
-        return numero;
+        return num;
     }
      /**
     * getter rue
@@ -154,7 +154,7 @@ public class Formateur {
  */
     @Override
     public String toString() {
-        return "Formateur{" + "idform=" + idform + ", matricule=" + matricule + ", nom=" + nom + ", prenom=" + prenom + ", numero=" + numero + ", rue=" + rue + ", localite=" + localite + ", cp=" + cp + ", tel=" + tel + '}';
+        return "Formateur{" + "idform=" + idform + ", matricule=" + matricule + ", nom=" + nom + ", prenom=" + prenom + ", numero=" + num + ", rue=" + rue + ", localite=" + localite + ", cp=" + cp + ", tel=" + tel + '}';
     }
 
     @Override
@@ -221,11 +221,27 @@ public class Formateur {
     */
 	protected String tel;
         
-        public FormateurBuilder(int idform,String matricule,String nom,String prenom) throws Exception {
-             if(idform<=0 ||matricule==null || nom==null || prenom==null) throw new Exception("informations de construction incomplètes");
+
+        public FormateurBuilder setIdform(int idform) {
+            this.idform = idform;
+            return this;
+        }
+        
+        public FormateurBuilder setMatricule(String matricule){
+            this.matricule=matricule;
+            return this;
+        }
+        public FormateurBuilder setNom(String nom) {
+            this.nom = nom;
+            return this;
         }
 
+        public FormateurBuilder setPrenom(String prenom) {
+            this.prenom = prenom;
+            return this;
+        }
 
+       
         public FormateurBuilder setCp(int cp) {
             this.cp = cp;
             return this;
@@ -247,11 +263,11 @@ public class Formateur {
         }
 
         public FormateurBuilder setTel(String tel){
-            this.num=num;
+            this.tel=tel;
             return this;
         }
         public Formateur build() throws Exception{
-          
+             if(idform<=0 ||matricule==null || nom==null || prenom==null) throw new Exception("informations de construction incomplètes");
             return new Formateur(this);
         }
 
