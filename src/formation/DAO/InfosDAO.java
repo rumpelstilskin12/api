@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import myconnections.DBConnection;
 
 /**
@@ -108,7 +109,11 @@ public class InfosDAO extends DAO <Infos> {
 
             System.out.println("infos a bien été surpprimé ");
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLIntegrityConstraintViolationException icve) {
+        throw new SQLException("Impossible à supprimer ===> le record est lié à la table sessioncours");
+        }
+        catch (SQLException e) {
             System.out.println("Aucune ligne effacée : infos n'existe pas dans la bd ");
         }
     }

@@ -54,16 +54,20 @@ public class RechCoursMatiere extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtIdcours = new javax.swing.JTextField();
-        txtHeures = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(153, 153, 153));
+        setBackground(new java.awt.Color(0, 0, 0));
 
+        labelMatiere.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        labelMatiere.setForeground(new java.awt.Color(0, 153, 255));
         labelMatiere.setText("matiere");
 
+        txtMatiere.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtMatiere.setForeground(new java.awt.Color(255, 255, 255));
+
         btRechercher.setBackground(new java.awt.Color(153, 153, 153));
-        btRechercher.setText("Rechercher");
+        btRechercher.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btRechercher.setText("rechercher");
+        btRechercher.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(0, 153, 255), new java.awt.Color(0, 153, 255), new java.awt.Color(0, 153, 255)));
         btRechercher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btRechercherActionPerformed(evt);
@@ -83,13 +87,9 @@ public class RechCoursMatiere extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setText("idcours");
-
-        jLabel2.setText("heures");
-
-        txtIdcours.setEditable(false);
-
-        txtHeures.setEditable(false);
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Recherche d'un cours selon sa matière");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,45 +98,37 @@ public class RechCoursMatiere extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btRechercher))
+                        .addGap(202, 202, 202)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(labelMatiere)
+                                .addGap(134, 134, 134)
+                                .addComponent(txtMatiere))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(86, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMatiere)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(69, 69, 69)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMatiere, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                    .addComponent(txtIdcours)
-                    .addComponent(txtHeures))
+                        .addGap(330, 330, 330)
+                        .addComponent(btRechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addComponent(jLabel1)
+                .addContainerGap(292, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel1)
+                .addGap(97, 97, 97)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelMatiere)
-                    .addComponent(txtMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(txtIdcours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtHeures, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtMatiere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMatiere))
+                .addGap(71, 71, 71)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(btRechercher)
-                .addGap(33, 33, 33))
+                .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,34 +148,7 @@ public class RechCoursMatiere extends javax.swing.JPanel {
             v.add(m.getHeures());
             dft1.addRow(v);
            
-        }
-        
-       /* String matiere = txtMatiere.getText();
- 
-           List <Cours> c = coursDAO.rechCoursMat(matiere);
-           
-            txtIdcours.setText("" + c.);
-            txtHeures.setText("" + c.getHeures());
-            int idcours=c.getIdcours();
-            //int idsesscoursrech = Integer.parseInt(txtIdcours.getText());
-         //   System.out.println("idsesscoursrech");
-           
-            List<SessionCours> ssc = sessionCoursDAO.rechSessionCours(idcours);
-            int nr = dft1.getRowCount();
-            for (int i = nr - 1; i >= 0; i--) {
-                dft1.removeRow(i);
-            }
-            for (SessionCours sco : ssc) {
- 
-                Vector v = new Vector();
-                v.add(sco.getIdsesscours());
-                v.add(sco.getDatedebut());
-                v.add(sco.getDatefin());
-                v.add(sco.getNbreinscrits());
-                v.add(sco.getIdlocal());
-                dft1.addRow(v);
- 
-    }    */                               
+        }                      
         
        }
        catch(Exception e){
@@ -196,12 +161,9 @@ public class RechCoursMatiere extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btRechercher;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelMatiere;
-    private javax.swing.JTextField txtHeures;
-    private javax.swing.JTextField txtIdcours;
     private javax.swing.JTextField txtMatiere;
     // End of variables declaration//GEN-END:variables
 }

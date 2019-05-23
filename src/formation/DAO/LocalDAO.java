@@ -150,8 +150,10 @@ public class LocalDAO extends DAO <Local> {
     public void delete(Local obj) throws SQLException {
 
         String req = "delete from api_local where sigle=?";
-        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
-
+       
+        
+        try( PreparedStatement pstm = dbConnect.prepareStatement(req))  {
+            
             pstm.setString(1, obj.getSigle());
             int n = pstm.executeUpdate();
             if (n == 0) {
@@ -160,6 +162,9 @@ public class LocalDAO extends DAO <Local> {
                 System.out.println("Le local a bien été supprimé ");
             }
 
+        }
+        catch (SQLIntegrityConstraintViolationException icve) {
+        throw new SQLException("Impossible à supprimer ===> le record est lié à la table sessioncours");
         }
     }
 

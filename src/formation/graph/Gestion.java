@@ -57,7 +57,9 @@ public class Gestion extends javax.swing.JFrame {
     SessionCoursDAO sessionCoursDAO = new SessionCoursDAO();
     sessionCoursDAO.setConnection(dbConnect);
     creationSessionCours1.setSessionCoursDAO(sessionCoursDAO);
+    rechSessionCours1.setSessionCoursDAO(sessionCoursDAO);
     rechCoursIdcours1.setSessionCoursDAO(sessionCoursDAO);
+    
     
     VueHeuresSessionDAO vueHeuresSessionDAO = new VueHeuresSessionDAO();
     vueHeuresSessionDAO.setConnection(dbConnect);
@@ -81,7 +83,6 @@ public class Gestion extends javax.swing.JFrame {
         home1 = new formation.graph.home();
         rechLocalDescription1 = new formation.graph.RechLocalDescription();
         rechLocalSigle1 = new formation.graph.RechLocalSigle();
-        creationCours1 = new formation.graph.CreationCours();
         creationFormateur1 = new formation.graph.CreationFormateur();
         rechFormateurNom1 = new formation.graph.RechFormateurNom();
         rechFormateurMatricule1 = new formation.graph.RechFormateurMatricule();
@@ -91,6 +92,8 @@ public class Gestion extends javax.swing.JFrame {
         rechCoursMatiere1 = new formation.graph.RechCoursMatiere();
         vueHeuresSessionG1 = new formation.graph.VueHeuresSessionG();
         vueSessionCoursFormateurG1 = new formation.graph.VueSessionCoursFormateurG();
+        rechSessionCours1 = new formation.graph.RechSessionCours();
+        creationCours1 = new formation.graph.CreationCours();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuHome = new javax.swing.JMenu();
         MenuCours = new javax.swing.JMenu();
@@ -108,6 +111,7 @@ public class Gestion extends javax.swing.JFrame {
         itemRechDesc = new javax.swing.JMenuItem();
         MenuSessionCours = new javax.swing.JMenu();
         itemSessionCours = new javax.swing.JMenuItem();
+        itemRechSessionCours = new javax.swing.JMenuItem();
         MenuVueAffichage = new javax.swing.JMenu();
         vueHeuresSession = new javax.swing.JMenuItem();
         vueSessionCoursFormateur = new javax.swing.JMenuItem();
@@ -117,7 +121,6 @@ public class Gestion extends javax.swing.JFrame {
         getContentPane().add(home1, "cardHome");
         getContentPane().add(rechLocalDescription1, "cardRechDesc");
         getContentPane().add(rechLocalSigle1, "cardRechSigle");
-        getContentPane().add(creationCours1, "cardCreationCours");
         getContentPane().add(creationFormateur1, "cardCreationFormateur");
         getContentPane().add(rechFormateurNom1, "cardRechFormNom");
         getContentPane().add(rechFormateurMatricule1, "cardRechFormMatricule");
@@ -125,9 +128,15 @@ public class Gestion extends javax.swing.JFrame {
         getContentPane().add(creationSessionCours1, "cardSessionCours");
         getContentPane().add(rechCoursIdcours1, "cardRechCoursIdcours");
         getContentPane().add(rechCoursMatiere1, "cardRechCoursMatiere");
-        getContentPane().add(vueHeuresSessionG1, "carHeuresSession");
+        getContentPane().add(vueHeuresSessionG1, "cardHeuresSession");
         getContentPane().add(vueSessionCoursFormateurG1, "cardVueSessionCoursForm");
+        getContentPane().add(rechSessionCours1, "cardRechSessionCours");
+        getContentPane().add(creationCours1, "card16");
 
+        jMenuBar1.setBackground(new java.awt.Color(0, 0, 0));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+
+        MenuHome.setBackground(new java.awt.Color(255, 255, 255));
         MenuHome.setText("Accueil");
         MenuHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -233,6 +242,14 @@ public class Gestion extends javax.swing.JFrame {
         });
         MenuSessionCours.add(itemSessionCours);
 
+        itemRechSessionCours.setText("rechercheSessionCours");
+        itemRechSessionCours.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRechSessionCoursActionPerformed(evt);
+            }
+        });
+        MenuSessionCours.add(itemRechSessionCours);
+
         jMenuBar1.add(MenuSessionCours);
 
         MenuVueAffichage.setText("Affichage");
@@ -322,8 +339,13 @@ public class Gestion extends javax.swing.JFrame {
 
     private void vueHeuresSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vueHeuresSessionActionPerformed
         // TODO add your handling code here:
-         cardl.show(this.getContentPane(), "carHeuresSession");
+         cardl.show(this.getContentPane(), "cardHeuresSession");
     }//GEN-LAST:event_vueHeuresSessionActionPerformed
+
+    private void itemRechSessionCoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechSessionCoursActionPerformed
+        // TODO add your handling code here:
+        cardl.show(this.getContentPane(),"cardRechSessionCours");
+    }//GEN-LAST:event_itemRechSessionCoursActionPerformed
 
     /**
      * @param args the command line arguments
@@ -383,6 +405,7 @@ public class Gestion extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemRechMatricule;
     private javax.swing.JMenuItem itemRechNom;
     private javax.swing.JMenuItem itemRechS;
+    private javax.swing.JMenuItem itemRechSessionCours;
     private javax.swing.JMenuItem itemSessionCours;
     private javax.swing.JMenuBar jMenuBar1;
     private formation.graph.RechCoursIdcours rechCoursIdcours1;
@@ -391,6 +414,7 @@ public class Gestion extends javax.swing.JFrame {
     private formation.graph.RechFormateurNom rechFormateurNom1;
     private formation.graph.RechLocalDescription rechLocalDescription1;
     private formation.graph.RechLocalSigle rechLocalSigle1;
+    private formation.graph.RechSessionCours rechSessionCours1;
     private javax.swing.JMenuItem vueHeuresSession;
     private formation.graph.VueHeuresSessionG vueHeuresSessionG1;
     private javax.swing.JMenuItem vueSessionCoursFormateur;
