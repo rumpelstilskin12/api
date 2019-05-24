@@ -198,5 +198,25 @@ public class SessionCoursDAO extends DAO <SessionCours> {
         }
     }
     
+    public List<SessionCours> comboSessioncours() throws SQLException{
+        List<SessionCours> sesscours = new ArrayList();
+        String req = "select * from api_sessioncours";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+            try (ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()) {
+                    int idsesscours = rs.getInt("IDSESSCOURS");
+                    LocalDate datedebut = rs.getDate("DATEDEBUT").toLocalDate();
+                    LocalDate datefin = rs.getDate("DATEFIN").toLocalDate();
+                    int nbreinscrits = rs.getInt("NBREINSCRITS");
+                    int idlocal = rs.getInt("IDLOCAL");
+                    int idcours = rs.getInt("IDCOURS");
+                    
+                    sesscours.add(new SessionCours(idsesscours, datedebut, datefin, nbreinscrits, idlocal, idcours));
+                }
+            }
+        }
+        return sesscours;
+}
+    
     
 }

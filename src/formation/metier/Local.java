@@ -90,6 +90,10 @@ public class Local {
     public String toString() {
         return "Local{" + "idlocal=" + idlocal + ", sigle=" + sigle + ", places=" + places + ", description=" + description + '}';
     }
+    
+     public String toStringComboLocal() {
+        return "idlocal : " + idlocal +",Sigle : "+ sigle + ", places : " + places ;
+    }
 
    
    

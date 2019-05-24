@@ -5,8 +5,16 @@
  */
 package formation.graph;
 
+import formation.DAO.FormateurDAO;
 import formation.DAO.InfosDAO;
+import formation.DAO.SessionCoursDAO;
+import formation.metier.Formateur;
 import formation.metier.Infos;
+import formation.metier.SessionCours;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,11 +27,72 @@ public class CreationInfos extends javax.swing.JPanel {
      * Creates new form CreationInfos
      */
      InfosDAO infosDAO=null;
+     FormateurDAO formateurDAO = null;
+     SessionCoursDAO sessionCoursDAO = null;
+     
+      List<Formateur> f;
+      List<SessionCours> sess;
+
+      DefaultComboBoxModel dc = new DefaultComboBoxModel();
+
+      DefaultComboBoxModel dc2 = new DefaultComboBoxModel();
+      
+      public void comboFormateur() {
+       
+        try {
+            f = formateurDAO.comboFormateur();
+            if (comboIdform != null) {
+                comboIdform.removeAllItems();
+            }
+            Iterator<Formateur> itform = f.iterator();
+            while (itform.hasNext()) {
+                Formateur f2 = itform.next();
+                dc.addElement(f2.toStringComboFormateur());
+            }
+            
+            comboIdform.setModel(dc);
+
+        } catch (SQLException e) {
+            System.out.println("Exception" + e);
+        }
+
+
+    }
+
+    public void comboSessioncours() {
+     
+     
+     try {
+            sess = sessionCoursDAO.comboSessioncours();
+            if (comboIdsessioncours != null) {
+                comboIdsessioncours.removeAllItems();
+            }
+            Iterator<SessionCours> itseccs = sess.iterator();
+            while (itseccs.hasNext()) {
+                SessionCours sco = itseccs.next();
+                dc2.addElement(sco.toStringComboSessionCours());
+            }
+            
+            comboIdsessioncours.setModel(dc2);
+
+        } catch (SQLException e) {
+            System.out.println("Exception" + e);
+        }
+
+    }
+
     public CreationInfos() {
         initComponents();
     }
     public void setInfosDAO(InfosDAO infosDAO){
         this.infosDAO=infosDAO;
+    }
+    public void setFormateurDAO(FormateurDAO formateurDAO) {
+        this.formateurDAO = formateurDAO;
+    }
+    
+    public void setSessionCoursDAO(SessionCoursDAO sessionCoursDAO) {
+        this.sessionCoursDAO = sessionCoursDAO;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,9 +110,9 @@ public class CreationInfos extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtIdinfos = new javax.swing.JTextField();
         txtNb = new javax.swing.JTextField();
-        txtIdform = new javax.swing.JTextField();
-        txtIdsessioncours = new javax.swing.JTextField();
         btCreation = new javax.swing.JButton();
+        comboIdform = new javax.swing.JComboBox<>();
+        comboIdsessioncours = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -57,15 +126,15 @@ public class CreationInfos extends javax.swing.JPanel {
         jLabel2.setText("idInfos");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 153, 255));
         jLabel3.setText("nb");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 153, 255));
         jLabel4.setText("idform");
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 153, 255));
         jLabel5.setText("idsessioncours");
 
         txtIdinfos.setEditable(false);
@@ -75,6 +144,20 @@ public class CreationInfos extends javax.swing.JPanel {
         btCreation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCreationActionPerformed(evt);
+            }
+        });
+
+        comboIdform.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboIdform.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboIdformActionPerformed(evt);
+            }
+        });
+
+        comboIdsessioncours.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboIdsessioncours.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboIdsessioncoursActionPerformed(evt);
             }
         });
 
@@ -92,17 +175,17 @@ public class CreationInfos extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
                         .addGap(161, 161, 161)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtNb, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIdinfos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdform, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIdsessioncours, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboIdsessioncours, 0, 150, Short.MAX_VALUE)
+                            .addComponent(comboIdform, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNb)
+                            .addComponent(txtIdinfos)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(334, 334, 334)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(btCreation, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,14 +200,14 @@ public class CreationInfos extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(62, 62, 62)
+                .addGap(65, 65, 65)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(comboIdform, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdform, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(83, 83, 83)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdsessioncours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(comboIdsessioncours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(btCreation)
                 .addGap(127, 127, 127))
@@ -135,9 +218,11 @@ public class CreationInfos extends javax.swing.JPanel {
         // TODO add your handling code here:
         try{       
             int nb=Integer.parseInt(txtNb.getText());
-            int idform=Integer.parseInt(txtIdform.getText());
-            int idsesscours=Integer.parseInt(txtIdsessioncours.getText());
-            Infos i = new Infos(0,nb,idform,idsesscours);
+            int pos = comboIdform.getSelectedIndex();
+            Formateur f1 = f.get(pos);
+            int pos1 = comboIdsessioncours.getSelectedIndex();
+            SessionCours sess1 = sess.get(pos1);
+            Infos i = new Infos(0,nb,f1.getIdform(),sess1.getIdsesscours());
             i=infosDAO.create(i);
             txtIdinfos.setText(""+i.getIdinfos());
             JOptionPane.showMessageDialog(this,"infos créé","succès",JOptionPane.INFORMATION_MESSAGE);
@@ -149,17 +234,25 @@ public class CreationInfos extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btCreationActionPerformed
 
+    private void comboIdsessioncoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIdsessioncoursActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboIdsessioncoursActionPerformed
+
+    private void comboIdformActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIdformActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboIdformActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCreation;
+    private javax.swing.JComboBox<String> comboIdform;
+    private javax.swing.JComboBox<String> comboIdsessioncours;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField txtIdform;
     private javax.swing.JTextField txtIdinfos;
-    private javax.swing.JTextField txtIdsessioncours;
     private javax.swing.JTextField txtNb;
     // End of variables declaration//GEN-END:variables
 }

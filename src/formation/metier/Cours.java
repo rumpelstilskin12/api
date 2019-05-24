@@ -1,9 +1,8 @@
 
 package formation.metier;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
+
 
 /**
  * classe metier de gestion de cours

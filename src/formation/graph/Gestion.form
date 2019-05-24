@@ -316,5 +316,12 @@
         </Constraint>
       </Constraints>
     </Component>
+    <Component class="formation.graph.RechInfos" name="rechInfos1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="cardRechInfos"/>
+        </Constraint>
+      </Constraints>
+    </Component>
   </SubComponents>
 </Form>

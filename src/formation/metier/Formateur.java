@@ -112,7 +112,10 @@ public class Formateur {
     public String toString() {
         return "Formateur{" + "idform=" + idform + ", matricule=" + matricule + ", nom=" + nom + ", prenom=" + prenom + ", numero=" + numero + ", rue=" + rue + ", localite=" + localite + ", cp=" + cp + ", tel=" + tel + '}';
     }
-
+    public String toStringComboFormateur() {
+        return "Formateur{" + "idform=" + idform + ", matricule=" + matricule + ", nom=" + nom + ", prenom=" + prenom + '}';
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

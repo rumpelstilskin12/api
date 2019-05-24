@@ -33,16 +33,14 @@
               </Group>
               <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtIdlocal" max="32767" attributes="0"/>
-                      <Component id="txtIdcours" max="32767" attributes="0"/>
-                      <Component id="txtNbrInscrits" max="32767" attributes="0"/>
-                      <Component id="txtDateFin" alignment="1" pref="115" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="txtDateDebut" pref="121" max="32767" attributes="0"/>
+                  <Component id="txtDateDebut" pref="151" max="32767" attributes="0"/>
                   <Component id="txtIdsessionCours" alignment="0" max="32767" attributes="0"/>
+                  <Component id="comboIdcours" max="32767" attributes="0"/>
+                  <Component id="comboIdlocal" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtNbrInscrits" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtDateFin" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
@@ -84,13 +82,13 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtIdlocal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comboIdlocal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtIdcours" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comboIdcours" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -197,10 +195,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtNbrInscrits">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtIdlocal">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtIdcours">
-    </Component>
     <Component class="javax.swing.JButton" name="btCreation">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -243,6 +237,42 @@
         <Property name="text" type="java.lang.String" value="Cr&#xe9;ation d&apos;une session cours"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboIdlocal">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboIdlocalActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboIdcours">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboIdcoursActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

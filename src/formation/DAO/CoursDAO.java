@@ -176,4 +176,21 @@ public class CoursDAO extends DAO <Cours> {
         
     }
     
+    public List<Cours> comboCours() throws SQLException{
+        List<Cours> c = new ArrayList();
+        String req = "select * from api_cours";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+            try (ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()) {
+                    int idcours = rs.getInt("IDCOURS");
+                    String matiere = rs.getString("MATIERE");
+                    int heures = rs.getInt("HEURES");
+                    
+                    c.add(new Cours(idcours,matiere,heures));
+                }
+            }
+        }
+        return c;
+}
+    
 }

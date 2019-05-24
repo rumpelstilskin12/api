@@ -207,6 +207,24 @@ public class LocalDAO extends DAO <Local> {
         
     }
     
+      public List<Local> comboLocal() throws SQLException {
+        List<Local> loc = new ArrayList();
+        String req = "select * from api_local";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+            try (ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()) {
+                    int idlocal = rs.getInt("IDLOCAL");
+                    String sigle = rs.getString("SIGLE");
+                    int places = rs.getInt("PLACES");
+                    String description = rs.getString("DESCRIPTION");
+
+                    loc.add(new Local(idlocal, sigle, places, description));
+                }
+            }
+        }
+        return loc;
+    }
+    
 
 }
 

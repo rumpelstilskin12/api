@@ -227,6 +227,30 @@ public class FormateurDAO extends DAO <Formateur> {
         
         
     }
-    
+    public List<Formateur> comboFormateur() throws SQLException{
+        List<Formateur> f = new ArrayList();
+        String req = "select * from api_formateur";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+            try (ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()) {
+                    
+                    int idform = rs.getInt("IDFORM");
+                    String matricule = rs.getString("MATRICULE");
+                    String nom = rs.getString("NOM");
+                    String prenom = rs.getString("PRENOM");
+                    String numero = rs.getString("NUMERO");
+                    String rue = rs.getString("RUE");
+                    String localite = rs.getString("LOCALITE");
+                    int cp = rs.getInt("CP");
+                    String tel = rs.getString("TEL");
+
+                    
+                    
+                    f.add(new Formateur(idform, matricule, nom, prenom, numero, rue, localite, cp, tel));
+                }
+            }
+        }
+        return f;
+}
     
 }

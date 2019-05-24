@@ -60,11 +60,21 @@ public class Gestion extends javax.swing.JFrame {
     creationSessionCours1.setSessionCoursDAO(sessionCoursDAO);
     rechSessionCours1.setSessionCoursDAO(sessionCoursDAO);
     rechCoursIdcours1.setSessionCoursDAO(sessionCoursDAO);
+    creationSessionCours1.setLocalDAO(localDAO); //combo box local dans creation session cours: 
+    creationSessionCours1.comboLocal();
+    creationSessionCours1.setCoursDAO(coursDAO); // combo box cours dans creation session cours: 
+    creationSessionCours1.comboCours();
+        
     
     InfosDAO infosDAO = new InfosDAO();
     infosDAO.setConnection(dbConnect);
     creationInfos1.setInfosDAO(infosDAO);
+    creationInfos1.setFormateurDAO(formateurDAO); // combo box formateur dans creation infos : 
+    creationInfos1.comboFormateur();
+    creationInfos1.setSessionCoursDAO(sessionCoursDAO); // combo box sessioncours dans creation infos: 
+    creationInfos1.comboSessioncours();
     
+        
     
     VueHeuresSessionDAO vueHeuresSessionDAO = new VueHeuresSessionDAO();
     vueHeuresSessionDAO.setConnection(dbConnect);
@@ -73,6 +83,7 @@ public class Gestion extends javax.swing.JFrame {
     VueSessionCoursFormateurDAO vueSessionCoursFormateurDAO = new VueSessionCoursFormateurDAO();
     vueSessionCoursFormateurDAO.setConnection(dbConnect);
     vueSessionCoursFormateurG1.setVueSessionCoursFormateurDAO(vueSessionCoursFormateurDAO);
+    
     
     }
 
@@ -100,6 +111,7 @@ public class Gestion extends javax.swing.JFrame {
         rechSessionCours1 = new formation.graph.RechSessionCours();
         creationCours1 = new formation.graph.CreationCours();
         creationInfos1 = new formation.graph.CreationInfos();
+        rechInfos1 = new formation.graph.RechInfos();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuHome = new javax.swing.JMenu();
         MenuCours = new javax.swing.JMenu();
@@ -141,6 +153,7 @@ public class Gestion extends javax.swing.JFrame {
         getContentPane().add(rechSessionCours1, "cardRechSessionCours");
         getContentPane().add(creationCours1, "cardCreationCours");
         getContentPane().add(creationInfos1, "cardCreationInfos");
+        getContentPane().add(rechInfos1, "cardRechInfos");
 
         jMenuBar1.setBackground(new java.awt.Color(0, 0, 0));
         jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -355,6 +368,8 @@ public class Gestion extends javax.swing.JFrame {
 
     private void itemSessionCoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSessionCoursActionPerformed
         // TODO add your handling code here:
+        creationSessionCours1.comboCours();
+        creationSessionCours1.comboLocal();
          cardl.show(this.getContentPane(), "cardSessionCours");
     }//GEN-LAST:event_itemSessionCoursActionPerformed
 
@@ -375,11 +390,14 @@ public class Gestion extends javax.swing.JFrame {
 
     private void itemCreationInfosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCreationInfosActionPerformed
         // TODO add your handling code here:
+        creationInfos1.comboFormateur();
+       creationInfos1.comboSessioncours();
         cardl.show(this.getContentPane(),"cardCreationInfos");
     }//GEN-LAST:event_itemCreationInfosActionPerformed
 
     private void itemRechercheInfosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechercheInfosActionPerformed
         // TODO add your handling code here:
+        cardl.show(this.getContentPane(),"cardRechInfos");
     }//GEN-LAST:event_itemRechercheInfosActionPerformed
 
     /**
@@ -450,6 +468,7 @@ public class Gestion extends javax.swing.JFrame {
     private formation.graph.RechCoursMatiere rechCoursMatiere1;
     private formation.graph.RechFormateurMatricule rechFormateurMatricule1;
     private formation.graph.RechFormateurNom rechFormateurNom1;
+    private formation.graph.RechInfos rechInfos1;
     private formation.graph.RechLocalDescription rechLocalDescription1;
     private formation.graph.RechLocalSigle rechLocalSigle1;
     private formation.graph.RechSessionCours rechSessionCours1;

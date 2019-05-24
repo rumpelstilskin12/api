@@ -6,8 +6,6 @@
 package formation.metier;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -91,6 +89,10 @@ public class SessionCours {
     @Override
     public String toString() {
         return "SessionCours{" + "idsesscours=" + idsesscours + ", datedebut=" + datedebut + ", datefin=" + datefin + ", nbreinscrits=" + nbreinscrits + ", idlocal=" + idlocal + ", idcours=" + idcours + '}';
+    }
+    
+    public String toStringComboSessionCours() {
+        return "Sessioncours{" + "idsesscours:" + idsesscours + ", dateDebut:" + datedebut + ", dateFin:" + datefin +'}';
     }
 
     
