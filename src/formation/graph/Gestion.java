@@ -69,6 +69,7 @@ public class Gestion extends javax.swing.JFrame {
     InfosDAO infosDAO = new InfosDAO();
     infosDAO.setConnection(dbConnect);
     creationInfos1.setInfosDAO(infosDAO);
+    rechInfos1.setInfosDAO(infosDAO);
     creationInfos1.setFormateurDAO(formateurDAO); // combo box formateur dans creation infos : 
     creationInfos1.comboFormateur();
     creationInfos1.setSessionCoursDAO(sessionCoursDAO); // combo box sessioncours dans creation infos: 
@@ -138,7 +139,7 @@ public class Gestion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
-        getContentPane().add(home1, "card15");
+        getContentPane().add(home1, "cardHome");
         getContentPane().add(rechLocalDescription1, "cardRechDesc");
         getContentPane().add(rechLocalSigle1, "cardRechSigle");
         getContentPane().add(creationFormateur1, "cardCreationFormateur");

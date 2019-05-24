@@ -183,7 +183,7 @@ public class FormateurDAO extends DAO <Formateur> {
             }
 
         }
-        catch (SQLIntegrityConstraintViolationException icve) {
+        catch (SQLIntegrityConstraintViolationException sicve) {
         throw new SQLException("Impossible à supprimer ===> le record est lié à la table infos");
         }
     }

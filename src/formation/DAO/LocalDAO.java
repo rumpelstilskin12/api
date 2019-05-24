@@ -163,7 +163,7 @@ public class LocalDAO extends DAO <Local> {
             }
 
         }
-        catch (SQLIntegrityConstraintViolationException icve) {
+        catch (SQLIntegrityConstraintViolationException sicve) {
         throw new SQLException("Impossible à supprimer ===> le record est lié à la table sessioncours");
         }
     }

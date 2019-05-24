@@ -248,7 +248,7 @@ public class RechCoursIdcours extends javax.swing.JPanel {
              coursDAO.delete(c);
              txtMatiere.setText("");
              txtHeures.setText("");
-             sessionCoursDAO.delete(s);
+             //sessionCoursDAO.delete(s); ==> ne pas prendre en compte 
              
              
              JOptionPane.showMessageDialog(this,"cours effacé","succès",JOptionPane.INFORMATION_MESSAGE);

@@ -110,7 +110,7 @@ public class InfosDAO extends DAO <Infos> {
             System.out.println("infos a bien été surpprimé ");
 
         } 
-        catch (SQLIntegrityConstraintViolationException icve) {
+        catch (SQLIntegrityConstraintViolationException sicve) {
         throw new SQLException("Impossible à supprimer ===> le record est lié à la table sessioncours");
         }
         catch (SQLException e) {

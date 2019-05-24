@@ -5,6 +5,10 @@
  */
 package formation.graph;
 
+import formation.DAO.InfosDAO;
+import formation.metier.Infos;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author BARCA
@@ -14,10 +18,14 @@ public class RechInfos extends javax.swing.JPanel {
     /**
      * Creates new form RechInfos
      */
+    InfosDAO infosDAO = null;
+    Infos infos = null;
     public RechInfos() {
         initComponents();
     }
-
+    public void setInfosDAO(InfosDAO infosDAO) {
+        this.infosDAO = infosDAO;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,14 +157,58 @@ public class RechInfos extends javax.swing.JPanel {
 
     private void btRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRechercheActionPerformed
         // TODO add your handling code here:
+        try{
+              int idinfos= Integer.parseInt(txtIdinfos.getText());
+             infos=infosDAO.read(idinfos);
+             txtNb.setText(""+infos.getNb());
+             txtIdform.setText(""+infos.getIdform());
+             txtIdsesscours.setText(""+infos.getIdsesscours());
+         
+             
+             JOptionPane.showMessageDialog(this,"Infos trouvée","succès",JOptionPane.INFORMATION_MESSAGE);
+              
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btRechercheActionPerformed
 
     private void btmajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmajActionPerformed
         // TODO add your handling code here:
+          try{  
+             int idinfos=Integer.parseInt(txtIdinfos.getText());
+             int nb=Integer.parseInt(txtNb.getText());
+             int idform=Integer.parseInt(txtIdform.getText());
+             int idsesscours=Integer.parseInt(txtIdsesscours.getText());
+            
+             Infos i= new Infos(idinfos,nb,idform,idsesscours);
+             infosDAO.update(i);
+             JOptionPane.showMessageDialog(this,"infos mis à jour","succès",JOptionPane.INFORMATION_MESSAGE);
+       
+             }
+        catch(Exception e){
+                   JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+           }
     }//GEN-LAST:event_btmajActionPerformed
 
     private void btSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSupprimerActionPerformed
         // TODO add your handling code here:
+         try {
+            int idinfos= Integer.parseInt(txtIdinfos.getText());
+
+            infosDAO.delete(infos);
+            txtIdinfos.setText("");
+            txtNb.setText("");
+            txtIdform.setText("");
+            txtIdsesscours.setText("");
+          
+           
+
+            JOptionPane.showMessageDialog(this, "infos effacé", "succès", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "ERREUR", JOptionPane.ERROR_MESSAGE);
+        }
+    
     }//GEN-LAST:event_btSupprimerActionPerformed
 
 

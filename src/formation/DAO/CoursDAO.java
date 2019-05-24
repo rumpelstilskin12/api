@@ -9,6 +9,7 @@ import formation.metier.Cours;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,7 +134,10 @@ public class CoursDAO extends DAO <Cours> {
                 System.out.println("Le cours a bien été supprimé ");
             }
 
+        } catch (SQLIntegrityConstraintViolationException sicve) {
+            throw new SQLException("Impossible à supprimer ===> le record est lié à la table sessioncours");
         }
+
     }
 
         
