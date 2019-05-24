@@ -62,7 +62,6 @@ public class RechCoursMatiere extends javax.swing.JPanel {
         labelMatiere.setText("matiere");
 
         txtMatiere.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtMatiere.setForeground(new java.awt.Color(255, 255, 255));
 
         btRechercher.setBackground(new java.awt.Color(153, 153, 153));
         btRechercher.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N

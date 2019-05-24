@@ -7,6 +7,7 @@ package formation.graph;
 
 import formation.DAO.CoursDAO;
 import formation.DAO.FormateurDAO;
+import formation.DAO.InfosDAO;
 import formation.DAO.LocalDAO;
 import formation.DAO.SessionCoursDAO;
 import formation.DAO.VueHeuresSessionDAO;
@@ -60,6 +61,10 @@ public class Gestion extends javax.swing.JFrame {
     rechSessionCours1.setSessionCoursDAO(sessionCoursDAO);
     rechCoursIdcours1.setSessionCoursDAO(sessionCoursDAO);
     
+    InfosDAO infosDAO = new InfosDAO();
+    infosDAO.setConnection(dbConnect);
+    creationInfos1.setInfosDAO(infosDAO);
+    
     
     VueHeuresSessionDAO vueHeuresSessionDAO = new VueHeuresSessionDAO();
     vueHeuresSessionDAO.setConnection(dbConnect);
@@ -94,6 +99,7 @@ public class Gestion extends javax.swing.JFrame {
         vueSessionCoursFormateurG1 = new formation.graph.VueSessionCoursFormateurG();
         rechSessionCours1 = new formation.graph.RechSessionCours();
         creationCours1 = new formation.graph.CreationCours();
+        creationInfos1 = new formation.graph.CreationInfos();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuHome = new javax.swing.JMenu();
         MenuCours = new javax.swing.JMenu();
@@ -105,6 +111,8 @@ public class Gestion extends javax.swing.JFrame {
         itemRechMatricule = new javax.swing.JMenuItem();
         itemRechNom = new javax.swing.JMenuItem();
         MenuInfos = new javax.swing.JMenu();
+        itemCreationInfos = new javax.swing.JMenuItem();
+        itemRechercheInfos = new javax.swing.JMenuItem();
         MenuLocal = new javax.swing.JMenu();
         itemCreat = new javax.swing.JMenuItem();
         itemRechS = new javax.swing.JMenuItem();
@@ -118,7 +126,7 @@ public class Gestion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
-        getContentPane().add(home1, "cardHome");
+        getContentPane().add(home1, "card15");
         getContentPane().add(rechLocalDescription1, "cardRechDesc");
         getContentPane().add(rechLocalSigle1, "cardRechSigle");
         getContentPane().add(creationFormateur1, "cardCreationFormateur");
@@ -131,7 +139,8 @@ public class Gestion extends javax.swing.JFrame {
         getContentPane().add(vueHeuresSessionG1, "cardHeuresSession");
         getContentPane().add(vueSessionCoursFormateurG1, "cardVueSessionCoursForm");
         getContentPane().add(rechSessionCours1, "cardRechSessionCours");
-        getContentPane().add(creationCours1, "card16");
+        getContentPane().add(creationCours1, "cardCreationCours");
+        getContentPane().add(creationInfos1, "cardCreationInfos");
 
         jMenuBar1.setBackground(new java.awt.Color(0, 0, 0));
         jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -202,6 +211,23 @@ public class Gestion extends javax.swing.JFrame {
         jMenuBar1.add(MenuFormateur);
 
         MenuInfos.setText("Infos");
+
+        itemCreationInfos.setText("créer");
+        itemCreationInfos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCreationInfosActionPerformed(evt);
+            }
+        });
+        MenuInfos.add(itemCreationInfos);
+
+        itemRechercheInfos.setText("rechercher infos");
+        itemRechercheInfos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRechercheInfosActionPerformed(evt);
+            }
+        });
+        MenuInfos.add(itemRechercheInfos);
+
         jMenuBar1.add(MenuInfos);
 
         MenuLocal.setText("Local");
@@ -347,6 +373,15 @@ public class Gestion extends javax.swing.JFrame {
         cardl.show(this.getContentPane(),"cardRechSessionCours");
     }//GEN-LAST:event_itemRechSessionCoursActionPerformed
 
+    private void itemCreationInfosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCreationInfosActionPerformed
+        // TODO add your handling code here:
+        cardl.show(this.getContentPane(),"cardCreationInfos");
+    }//GEN-LAST:event_itemCreationInfosActionPerformed
+
+    private void itemRechercheInfosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRechercheInfosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemRechercheInfosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,12 +428,14 @@ public class Gestion extends javax.swing.JFrame {
     private javax.swing.JMenu MenuVueAffichage;
     private formation.graph.CreationCours creationCours1;
     private formation.graph.CreationFormateur creationFormateur1;
+    private formation.graph.CreationInfos creationInfos1;
     private formation.graph.CreationLocal creationLocal1;
     private formation.graph.CreationSessionCours creationSessionCours1;
     private formation.graph.home home1;
     private javax.swing.JMenuItem itemCreat;
     private javax.swing.JMenuItem itemCreatC;
     private javax.swing.JMenuItem itemCreatF;
+    private javax.swing.JMenuItem itemCreationInfos;
     private javax.swing.JMenuItem itemRechDesc;
     private javax.swing.JMenuItem itemRechIdcours;
     private javax.swing.JMenuItem itemRechMat;
@@ -406,6 +443,7 @@ public class Gestion extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemRechNom;
     private javax.swing.JMenuItem itemRechS;
     private javax.swing.JMenuItem itemRechSessionCours;
+    private javax.swing.JMenuItem itemRechercheInfos;
     private javax.swing.JMenuItem itemSessionCours;
     private javax.swing.JMenuBar jMenuBar1;
     private formation.graph.RechCoursIdcours rechCoursIdcours1;

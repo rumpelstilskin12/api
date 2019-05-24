@@ -68,7 +68,6 @@ public class CreationLocal extends javax.swing.JPanel {
 
         txtIdlocal.setEditable(false);
         txtIdlocal.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtIdlocal.setForeground(new java.awt.Color(255, 255, 255));
         txtIdlocal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdlocalActionPerformed(evt);
@@ -76,7 +75,6 @@ public class CreationLocal extends javax.swing.JPanel {
         });
 
         txtSigle.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtSigle.setForeground(new java.awt.Color(255, 255, 255));
         txtSigle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSigleActionPerformed(evt);
@@ -84,10 +82,8 @@ public class CreationLocal extends javax.swing.JPanel {
         });
 
         txtPlaces.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtPlaces.setForeground(new java.awt.Color(255, 255, 255));
 
         txtDescription.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtDescription.setForeground(new java.awt.Color(255, 255, 255));
 
         btCreation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btCreation.setText("création");

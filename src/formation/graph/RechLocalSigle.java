@@ -68,10 +68,8 @@ public class RechLocalSigle extends javax.swing.JPanel {
         labelDescription.setText("Description");
 
         txtPlaces.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtPlaces.setForeground(new java.awt.Color(255, 255, 255));
 
         txtDescription.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtDescription.setForeground(new java.awt.Color(255, 255, 255));
 
         btRecherche.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btRecherche.setText("rechercher");
@@ -107,10 +105,8 @@ public class RechLocalSigle extends javax.swing.JPanel {
 
         txtIdlocal.setEditable(false);
         txtIdlocal.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtIdlocal.setForeground(new java.awt.Color(255, 255, 255));
 
         txtSigle.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtSigle.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

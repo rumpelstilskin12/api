@@ -77,7 +77,6 @@ public class VueHeuresSessionG extends javax.swing.JPanel {
         jLabel1.setText("idsesscours");
 
         txtIdSessionCours.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtIdSessionCours.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));

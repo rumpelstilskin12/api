@@ -99,19 +99,8 @@ public class RechSessionCours extends javax.swing.JPanel {
         lbIdcours.setForeground(new java.awt.Color(0, 153, 255));
         lbIdcours.setText("idcours");
 
-        txtIdsesscours.setEditable(false);
-        txtIdsesscours.setForeground(new java.awt.Color(255, 255, 255));
-
-        txtNbreinscrits.setForeground(new java.awt.Color(255, 255, 255));
-
-        txtIdlocal.setForeground(new java.awt.Color(255, 255, 255));
-
-        txtIdcours.setForeground(new java.awt.Color(255, 255, 255));
-
-        txtDatedebut.setForeground(new java.awt.Color(255, 255, 255));
         txtDatedebut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-yy"))));
 
-        txtDatefin.setForeground(new java.awt.Color(255, 255, 255));
         txtDatefin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-yy"))));
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N

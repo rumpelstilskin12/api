@@ -89,6 +89,24 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Infos"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itemCreationInfos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="cr&#xe9;er"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemCreationInfosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemRechercheInfos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="rechercher infos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemRechercheInfosActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuLocal">
           <Properties>
@@ -196,7 +214,7 @@
     <Component class="formation.graph.home" name="home1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-          <CardConstraints cardName="cardHome"/>
+          <CardConstraints cardName="card15"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -287,7 +305,14 @@
     <Component class="formation.graph.CreationCours" name="creationCours1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-          <CardConstraints cardName="card16"/>
+          <CardConstraints cardName="cardCreationCours"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="formation.graph.CreationInfos" name="creationInfos1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+          <CardConstraints cardName="cardCreationInfos"/>
         </Constraint>
       </Constraints>
     </Component>

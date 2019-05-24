@@ -62,7 +62,6 @@ public class VueSessionCoursFormateurG extends javax.swing.JPanel {
         jLabel1.setText("idform  :");
 
         txtIdform.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtIdform.setForeground(new java.awt.Color(255, 255, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
